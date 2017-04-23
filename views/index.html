@@ -30,7 +30,9 @@
       <p>Search for tracks on Spotify:</p>
       <form>
         <input required type="text" maxlength="100" placeholder="Search query">
-        <input type="radio"
+        <input type="radio" name="context" value="artist">Artist name
+        <input type="radio" name="context" value="track">Track name
+        <input type="radio" name="context" value="all">All
         <button type="submit">Submit</button>
       </form>
       <section class="results">

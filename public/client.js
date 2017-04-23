@@ -9,9 +9,12 @@ $(function() {
 
   $('form').submit(function(event) {
     event.preventDefault();
+    
     let query = $('input').val();
-    let context = $('#context').val();
+    let context = $('input[name="context"]:checked').val();
+    
     $.get('/search?' + $.param({context: context, query: query}), function(data) {
+      $('#results').empty();
       $('input').val('');
       $('input').focus();
       

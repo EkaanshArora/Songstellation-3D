@@ -46,6 +46,11 @@ input {
   font-size: 16px;
 }
 
+input[type="radio"] {
+  display: inline-block;
+  width: auto;
+}
+
 button {
   font-size: 16px;
   border-radius: 3px;
