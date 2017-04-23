@@ -15,7 +15,7 @@ $(function() {
     
     $.get('/search?' + $.param({context: context, query: query}), function(data) {
       $('#results').empty();
-      $('input').val('');
+      $('input[type="text"]').val('');
       $('input').focus();
       
       data.tracks.items.forEach(function(track, index) {
