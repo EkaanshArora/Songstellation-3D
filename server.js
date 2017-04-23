@@ -38,16 +38,19 @@ app.get("/", function (request, response) {
 });
 
 app.get("/search", function (request, response) {
-  let context = '';
+  let query = request.query.query;
+  
+  console.log(request)
+  
   if(request.query.context) {
     if(request.query.context == 'artist') {
-      context = 'artist:';
+      query = 'artist:' + request.query.query;
     }
     if(request.query.context == 'track') {
-      context = 'track:';
+      query = 'track:' + request.query.query;
     }
   }
-  spotifyApi.searchTracks(context + request.query.query)
+  spotifyApi.searchTracks(query)
   .then(function(data) {
     console.log(data.body);
     response.send(data.body);
