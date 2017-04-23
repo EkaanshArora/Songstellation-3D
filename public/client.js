@@ -6,20 +6,19 @@
 
 $(function() {
   console.log('hello world :o');
-  
-  $.get('/dreams', function(dreams) {
-    dreams.forEach(function(dream) {
-      $('<li></li>').text(dream).appendTo('ul#dreams');
-    });
-  });
 
   $('form').submit(function(event) {
     event.preventDefault();
-    var dream = $('input').val();
-    $.post('/dreams?' + $.param({dream: dream}), function() {
-      $('<li></li>').text(dream).appendTo('ul#dreams');
+    let query = $('input').val();
+    let context = $('#context').val();
+    $.get('/search?' + $.param({context: context, query: query}), function(data) {
       $('input').val('');
       $('input').focus();
+      
+      data.tracks.items.forEach(function(track, index) {
+        let newEl = $('<li onClick="getFeatures(&apos;' + track.id + '&apos;)"></li>').text(track.name + '   |   ' + track.artists[0].name);
+        $('#results').append(newEl);
+      });
     });
   });
 
