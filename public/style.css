@@ -15,7 +15,7 @@ body {
 
 h1 {
   font-weight: bold;
-  color: pink;
+  color: #FF6437;
 }
 
 .bold {
@@ -29,8 +29,8 @@ p {
 form {
   margin-bottom: 25px;
   padding: 15px;
-  background-color: #F037A5;
-  color: #503750;
+  background-color: #1E3264;
+  color: #FF6437;
   display: inline-block;
   width: 100%;
   max-width: 340px;
@@ -55,14 +55,16 @@ input[type="checkbox"] {
 button {
   font-size: 16px;
   border-radius: 3px;
-  background-color: lightgrey;
-  border: 1px solid grey;
-  box-shadow: 2px 2px teal;
+  background-color: #1E3264;
+  border: 1px solid #FF6437;
+  box-shadow: 2px 2px #FF6437;
   cursor: pointer;
+  width: 100px;
+  height: 40px;
 }
 
 button:hover {
-  background-color: yellow;
+  background-color: #FF6437;
 }
 
 button:active {

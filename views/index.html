@@ -26,16 +26,17 @@
     </header>
 
     <main>
-      <p class="bold">Oh hi,</p>
-      <p>Search for tracks on Spotify:</p>
+      <p>Select scopes:</p>
       <form id="authorize-scopes">
         <div>
           <input type="checkbox" name="scope" value="playlist-read-private"><label>playlist-read-private</label>
-        <input type="checkbox" name="scope" value="playlist-read-collaborative"><label>playlist-read-collaborative</label>
-        <input type="checkbox" name="scope" value="playlist-modify-public"><label>playlist-modify-public</label>
-        <input type="checkbox" name="scope" value="playlist-modify-private"><label>playlist-modify-private</label>
+          <input type="checkbox" name="scope" value="playlist-read-collaborative"><label>playlist-read-collaborative</label>
+          <input type="checkbox" name="scope" value="playlist-modify-public"><label>playlist-modify-public</label>
+          <input type="checkbox" name="scope" value="playlist-modify-private"><label>playlist-modify-private</label>
         </div>
-        <input type="checkbox" name="scope" value="streaming"><label>streaming</label>
+        <div>
+          <input type="checkbox" name="scope" value="streaming"><label>streaming</label>
+        </div>
         <div>
           <input type="checkbox" name="scope" value="user-follow-modify"><label>user-follow-modify</label>
           <input type="checkbox" name="scope" value="user-follow-read"><label>user-follow-read</label>
@@ -49,7 +50,9 @@ user-read-private
 user-read-birthdate
 user-read-email
 user-top-read
-        <button type="submit"><a href="/authorize">GO</a></button>
+        <div>
+          <button type="submit"><a href="/authorize">GO</a></button>
+        </div>
       </form>
       <section class="results">
         <ul id="results">
