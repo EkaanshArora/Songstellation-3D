@@ -52,6 +52,10 @@ input[type="checkbox"] {
   width: auto;
 }
 
+label {
+  margin-right: 10px;
+}
+
 button {
   font-size: 16px;
   border-radius: 3px;
@@ -61,6 +65,12 @@ button {
   cursor: pointer;
   width: 100px;
   height: 40px;
+  margin: 20px 0;
+}
+
+a button {
+  color: white;
+  text-decoration: none;
 }
 
 button:hover {
