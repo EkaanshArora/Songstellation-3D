@@ -29,7 +29,8 @@ p {
 form {
   margin-bottom: 25px;
   padding: 15px;
-  background-color: cyan;
+  background-color: #F037A5;
+  color: #503750;
   display: inline-block;
   width: 100%;
   max-width: 340px;
@@ -84,4 +85,9 @@ footer > a {
 
 .nicejob {
   text-decoration: line-through;
+}
+
+#authorize-scopes {
+  width: 100%;
+  max-width: none;
 }

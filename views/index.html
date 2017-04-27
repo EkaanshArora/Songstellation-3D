@@ -28,22 +28,23 @@
     <main>
       <p class="bold">Oh hi,</p>
       <p>Search for tracks on Spotify:</p>
-      <form>
-        <input type="checkbox" name="scope" value="playlist-read-private"><label>playlist-read-private</label>
+      <form id="authorize-scopes">
+        <div>
+          <input type="checkbox" name="scope" value="playlist-read-private"><label>playlist-read-private</label>
         <input type="checkbox" name="scope" value="playlist-read-collaborative"><label>playlist-read-collaborative</label>
         <input type="checkbox" name="scope" value="playlist-modify-public"><label>playlist-modify-public</label>
-        <input type="checkbox" name="scope" value="playlist-modify-private"><label>pplaylist-modify-private</label>
+        <input type="checkbox" name="scope" value="playlist-modify-private"><label>playlist-modify-private</label>
+        </div>
         <input type="checkbox" name="scope" value="streaming"><label>streaming</label>
-        <input type="checkbox" name="scope" value="user-follow-modify"><label>user-follow-modify</label>
-        <input type="checkbox" name="scope" value="user-follow-read"><label>user-follow-read</label>
-        <input type="checkbox" name="scope" value="user-library-read"><label>playlist-read-collaborative</label>
-        <input type="checkbox" name="scope" value="playlist-modify-public"><label>playlist-modify-public</label>
+        <div>
+          <input type="checkbox" name="scope" value="user-follow-modify"><label>user-follow-modify</label>
+          <input type="checkbox" name="scope" value="user-follow-read"><label>user-follow-read</label>
+          <input type="checkbox" name="scope" value="user-library-read"><label>user-library-read</label>
+          <input type="checkbox" name="scope" value="user-library-modify"><label>user-library-modify</label>
+        </div>
+        
         
 
-user-follow-modify
-user-follow-read
-user-library-read
-user-library-modify
 user-read-private
 user-read-birthdate
 user-read-email
