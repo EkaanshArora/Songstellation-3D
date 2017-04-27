@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Spotify EasyAuth</title>
+    <title>Callback!</title>
     <meta name="description" content="A cool thing made with Glitch">
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
     <meta charset="utf-8">
@@ -21,7 +21,7 @@
   <body>
     <header>
       <h1>
-        Let's authorize Spotify
+        All done!
       </h1>
     </header>
 
@@ -29,17 +29,16 @@
       <p class="bold">Oh hi,</p>
       <p>Search for tracks on Spotify:</p>
       <form>
-        <input type="checkbox" name="scope" value="playlist-read-private"><label>playlist-read-private</label>
-        <input type="checkbox" name="scope" value="playlist-read-collaborative"><label>playlist-read-collaborative</label>
-        <input type="checkbox" name="scope" value="playlist-modify-public"><label>playlist-modify-public</label>
-        <input type="checkbox" name="scope" value="playlist-modify-private"><label>pplaylist-modify-private</label>
-        <input type="checkbox" name="scope" value="streaming"><label>streaming</label>
-        <input type="checkbox" name="scope" value="user-follow-modify"><label>user-follow-modify</label>
-        <input type="checkbox" name="scope" value="user-follow-read"><label>user-follow-read</label>
-        <input type="checkbox" name="scope" value="user-library-read"><label>playlist-read-collaborative</label>
-        <input type="checkbox" name="scope" value="playlist-modify-public"><label>playlist-modify-public</label>
+        <input required type="text" maxlength="100" placeholder="Search query">
+        <input type="checkbox" name="scope" value="artist"><label>Artist name</label>
+        <input type="checkbox" name="scope" value="track"><label>Track name</label>
+        <input type="checkbox" name="scope" value="all"><label>All</label>
         
-
+playlist-read-private
+playlist-read-collaborative
+playlist-modify-public
+playlist-modify-private
+streaming
 user-follow-modify
 user-follow-read
 user-library-read
