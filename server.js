@@ -12,7 +12,7 @@ var app = express();
 
 var SpotifyWebApi = require('spotify-web-api-node');
 
-var redirectUri = 'https://spotify-easy-auth.glitch.me/callback';
+var redirectUri = 'https://spotify-easyauth.glitch.me/callback';
 var tokenExpirationEpoch;
 
 var spotifyApi = new SpotifyWebApi({
@@ -44,6 +44,10 @@ app.use(express.static('public'));
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
+});
+
+app.get("/authorize", function (request, response) {
+  response.redirect(authorizeURL);
 });
 
 app.get("/callback", function (request, response) {
