@@ -36,12 +36,6 @@ var spotifyApi = new SpotifyWebApi({
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
@@ -54,6 +48,7 @@ app.get("/authorize", function (request, response) {
   response.send(authorizeURL);
 });
 
+// Exchange Authorization Code for an Access Token
 app.get("/callback", function (request, response) {
   var authorizationCode = request.query.code;
   
@@ -71,28 +66,6 @@ app.get("/callback", function (request, response) {
     console.log('Retrieved token. It expires in ' + Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) + ' seconds!');
   }, function(err) {
     console.log('Something went wrong when retrieving the access token!', err.message);
-  });
-});
-
-app.get("/search", function (request, response) {
-  let query = request.query.query;
-  
-  console.log(request)
-  
-  if(request.query.context) {
-    if(request.query.context == 'artist') {
-      query = 'artist:' + request.query.query;
-    }
-    if(request.query.context == 'track') {
-      query = 'track:' + request.query.query;
-    }
-  }
-  spotifyApi.searchTracks(query)
-  .then(function(data) {
-    console.log(data.body);
-    response.send(data.body);
-  }, function(err) {
-    console.log(err)
   });
 });
 
