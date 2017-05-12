@@ -42,7 +42,10 @@ app.get("/", function (request, response) {
 });
 
 app.get("/authorize", function (request, response) {
-  var authorizeURL = spotifyApi.createAuthorizeURL(request.query.scopes);
+  var scopesArray = request.query.scopes.split(',');
+  var authorizeURL = spotifyApi.createAuthorizeURL(scopesArray);
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   response.redirect(authorizeURL);
 });
 
