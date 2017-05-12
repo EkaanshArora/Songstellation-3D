@@ -32,11 +32,6 @@ var spotifyApi = new SpotifyWebApi({
 //     console.log('Something went wrong when retrieving an access token', err.message);
 //   });
 
-// Create the authorization URL
-var authorizeURL = spotifyApi.createAuthorizeURL(['user-read-private']);
-
-// https://accounts.spotify.com:443/authorize?client_id=5fe01282e44241328a84e7c5cc169165&response_type=code&redirect_uri=https://example.com/callback&scope=user-read-private%20user-read-email&state=some-state-of-my-choice
-console.log(authorizeURL);
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
@@ -47,6 +42,7 @@ app.get("/", function (request, response) {
 });
 
 app.get("/authorize", function (request, response) {
+  var authorizeURL = spotifyApi.createAuthorizeURL(request.query.scopes);
   response.redirect(authorizeURL);
 });
 
