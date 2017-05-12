@@ -36,6 +36,12 @@ var spotifyApi = new SpotifyWebApi({
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
@@ -44,8 +50,6 @@ app.get("/", function (request, response) {
 app.get("/authorize", function (request, response) {
   var scopesArray = request.query.scopes.split(',');
   var authorizeURL = spotifyApi.createAuthorizeURL(scopesArray);
-  response.header("Access-Control-Allow-Origin", "*");
-  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   response.redirect(authorizeURL);
 });
 
