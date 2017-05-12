@@ -18,7 +18,8 @@ $(function() {
     });
     
     $.get('/authorize?' + $.param({scopes: scopesList}), function(data) {
-      
+      console.log(data)
+      window.location = data;
     });
   });
 

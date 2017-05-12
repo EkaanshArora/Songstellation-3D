@@ -50,13 +50,14 @@ app.get("/", function (request, response) {
 app.get("/authorize", function (request, response) {
   var scopesArray = request.query.scopes.split(',');
   var authorizeURL = spotifyApi.createAuthorizeURL(scopesArray);
-  response.redirect(authorizeURL);
+  console.log(authorizeURL)
+  response.send(authorizeURL);
 });
 
 app.get("/callback", function (request, response) {
   var authorizationCode = request.query.code;
   
-  response.sendFile(__dirname + '/views/index.html');
+  response.sendFile(__dirname + '/views/callback.html');
   
   spotifyApi.authorizationCodeGrant(authorizationCode)
   .then(function(data) {
