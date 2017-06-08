@@ -1,12 +1,6 @@
 <!-- This is a static file -->
 <!-- served from your routes in server.js -->
 
-<!-- You might want to try something fancier: -->
-<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
-<!-- pug: https://pugjs.org/ -->
-<!-- haml: http://haml.info/ -->
-<!-- hbs(handlebars): http://handlebarsjs.com/ -->
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -29,15 +23,24 @@
       <p>Select scopes:</p>
       <form id="authorize-scopes">
         <div>
+          <h4>
+            Playlist
+          </h4>
           <input type="checkbox" name="scope" value="playlist-read-private"><label>playlist-read-private</label>
           <input type="checkbox" name="scope" value="playlist-read-collaborative"><label>playlist-read-collaborative</label>
           <input type="checkbox" name="scope" value="playlist-modify-public"><label>playlist-modify-public</label>
           <input type="checkbox" name="scope" value="playlist-modify-private"><label>playlist-modify-private</label>
         </div>
         <div>
+          <h4>
+            Streaming
+          </h4>
           <input type="checkbox" name="scope" value="streaming"><label>streaming</label>
         </div>
         <div>
+          <h4>
+            User
+          </h4>
           <input type="checkbox" name="scope" value="user-follow-modify"><label>user-follow-modify</label>
           <input type="checkbox" name="scope" value="user-follow-read"><label>user-follow-read</label>
           <input type="checkbox" name="scope" value="user-library-read"><label>user-library-read</label>
@@ -46,14 +49,16 @@
           <input type="checkbox" name="scope" value="user-read-birthdate"><label>user-read-birthdate</label>
           <input type="checkbox" name="scope" value="user-read-email"><label>user-read-email</label>
           <input type="checkbox" name="scope" value="user-top-read"><label>user-top-read</label>
-        </div><div>
           <input type="checkbox" name="scope" value="user-read-playback-state"><label>user-read-playback-state</label>
           <input type="checkbox" name="scope" value="user-read-recently-played"><label>user-read-recently-played</label>
           <input type="checkbox" name="scope" value="user-read-currently-playing"><label>user-read-currently-playing</label>
           <input type="checkbox" name="scope" value="user-modify-playback-state"><label>user-modify-playback-state</label>
         </div>
+        <p>
+          
+        </p>
         <div>
-          <a href="/authorize"><button type="submit">GO</button></a>
+          <a href="/authorize"><button type="submit">Go!</button></a>
         </div>
       </form>
       <section class="results">

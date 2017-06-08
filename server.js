@@ -5,11 +5,7 @@
 var express = require('express');
 var app = express();
 
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
-
 // init Spotify API wrapper
-
 var SpotifyWebApi = require('spotify-web-api-node');
 
 var redirectUri = 'https://'+process.env.PROJECT_NAME+'.glitch.me/callback';
@@ -20,18 +16,6 @@ var spotifyApi = new SpotifyWebApi({
   clientSecret : process.env.CLIENT_SECRET,
   redirectUri : redirectUri
 });
-
-// spotifyApi.clientCredentialsGrant()
-//   .then(function(data) {
-//     console.log('The access token expires in ' + data.body['expires_in']);
-//     console.log('The access token is ' + data.body['access_token']);
-
-//     // Save the access token so that it's used in future calls
-//     spotifyApi.setAccessToken(data.body['access_token']);
-//   }, function(err) {
-//     console.log('Something went wrong when retrieving an access token', err.message);
-//   });
-
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
