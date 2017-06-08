@@ -34,7 +34,7 @@ app.get("/authorize", function (request, response) {
 app.get("/callback", function (request, response) {
   var authorizationCode = request.query.code;
   
-  // Check folks haven't gone direct to the callback URL
+  // Check folks haven't just gone direct to the callback URL
   if (!authorizationCode) {
     response.redirect('/');
   } else {
