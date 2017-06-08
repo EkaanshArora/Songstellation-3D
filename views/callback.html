@@ -1,16 +1,10 @@
 <!-- This is a static file -->
 <!-- served from your routes in server.js -->
 
-<!-- You might want to try something fancier: -->
-<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
-<!-- pug: https://pugjs.org/ -->
-<!-- haml: http://haml.info/ -->
-<!-- hbs(handlebars): http://handlebarsjs.com/ -->
-
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Callback!</title>
+    <title>Spotify OAuth</title>
     <meta name="description" content="A cool thing made with Glitch">
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
     <meta charset="utf-8">
@@ -27,16 +21,12 @@
 
     <main>
       <p class="bold">Oh hi,</p>
-      <p>Successfully authenticated.</p>
+      <p>You successfully authenticated with Spotify 👏🏾</p>
     </main>
 
-    <footer>
-      <a href="https://glitch.com">
-        Remix this in Glitch
-      </a>
-    </footer>
+    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>    
 
-    <!-- Your web-app is https, so your scripts need to be too -->
+    <script src="https://button.glitch.me/button.js" data-style="glitch"></script>
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
             crossorigin="anonymous"></script>
