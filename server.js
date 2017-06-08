@@ -7,10 +7,8 @@ var app = express();
 
 // init Spotify API wrapper
 var SpotifyWebApi = require('spotify-web-api-node');
-
 var redirectUri = 'https://'+process.env.PROJECT_NAME+'.glitch.me/callback';
 var tokenExpirationEpoch;
-
 var spotifyApi = new SpotifyWebApi({
   clientId : process.env.CLIENT_ID,
   clientSecret : process.env.CLIENT_SECRET,
@@ -36,7 +34,12 @@ app.get("/authorize", function (request, response) {
 app.get("/callback", function (request, response) {
   var authorizationCode = request.query.code;
   
-  response.sendFile(__dirname + '/views/callback.html');
+  // Check folks haven't gone direct to the callback URL
+  if (!authorizationCode) {
+    response.redirect('/');
+  } else {
+    response.sendFile(__dirname + '/views/callback.html');
+  }
   
   spotifyApi.authorizationCodeGrant(authorizationCode)
   .then(function(data) {
