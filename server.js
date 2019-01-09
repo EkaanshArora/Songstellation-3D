@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var fs = require('fs');
 app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
 // init Spotify API wrapper
@@ -48,8 +49,9 @@ app.get("/callback", function (request, response) {
         offset: 0
       })
       .then(function(data) {
-          console.log(data.body);
-          dataToSendObj = {'message': data.body};
+        dataToSendObj = {'message': JSON.stringify(data.body)};
+        console.log(dataToSendObj);
+        response.render(__dirname + '/views/callback.html',dataToSendObj);
       })
       .catch(function(err) {
         console.log('Unfortunately, something has gone wrong.', err.message);
@@ -57,7 +59,6 @@ app.get("/callback", function (request, response) {
     }, function(err) {
       console.log('Something went wrong when retrieving the access token!', err.message);
     });
-    response.render(__dirname + '/views/callback.html',dataToSendObj);
   }
 });
 
