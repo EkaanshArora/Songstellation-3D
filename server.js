@@ -15,6 +15,17 @@ var spotifyApi = new SpotifyWebApi({
   redirectUri : redirectUri
 });
 
+function topArtists() {
+      $.ajax({
+      url: "https://api.spotify.com/v1/me/top/artists?limit=5&time_range=short_term",
+      type: "GET",
+      success: function(data) { 
+        let ids = data.items.map(artist => artist.id).join(',');
+        console.log(ids);
+      }
+    });
+  }
+
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
@@ -51,6 +62,7 @@ app.get("/callback", function (request, response) {
     // Save the amount of seconds until the access token expired
     tokenExpirationEpoch = (new Date().getTime() / 1000) + data.body['expires_in'];
     console.log('Retrieved token. It expires in ' + Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) + ' seconds!');
+    topArtists();
   }, function(err) {
     console.log('Something went wrong when retrieving the access token!', err.message);
   });
