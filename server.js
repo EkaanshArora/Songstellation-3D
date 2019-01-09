@@ -1,8 +1,10 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
+
 app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
+
 // init Spotify API wrapper
 var SpotifyWebApi = require('spotify-web-api-node');
 var redirectUri = 'https://'+process.env.PROJECT_NAME+'.glitch.me/callback';
@@ -23,7 +25,7 @@ app.get("/authorize", function (request, response) {
   var scopesArray = ["user-top-read"]
   var authorizeURL = spotifyApi.createAuthorizeURL(scopesArray);
   console.log(authorizeURL)
-  response.send(authorizeURL);
+  response.redirect(authorizeURL);
 });
 
 // Exchange Authorization Code for an Access Token
@@ -49,13 +51,16 @@ app.get("/callback", function (request, response) {
         offset: 0
       })
       .then(function(data) {
-        dataToSendObj = {'message': JSON.stringify(data.body)};
+        for(var x in data.body.items)
+        {
+          var val = data.body.items[x];
+          console.log(JSON.stringify(val)+"\n\n");
+        }
+        var tracktitlelist=JSON.stringify(data.body.items)
+        dataToSendObj = {'message': tracktitlelist};
         console.log(dataToSendObj);
         response.render(__dirname + '/views/callback.html',dataToSendObj);
       })
-      .catch(function(err) {
-        console.log('Unfortunately, something has gone wrong.', err.message);
-      });
     }, function(err) {
       console.log('Something went wrong when retrieving the access token!', err.message);
     });
