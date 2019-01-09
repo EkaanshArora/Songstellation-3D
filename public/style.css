@@ -10,3 +10,7 @@ input, label {
   display: inline !important;
   width: 1% !important;
 }
+button{
+  width: 50vw;
+  height 10vh;
+}
