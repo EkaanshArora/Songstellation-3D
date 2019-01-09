@@ -50,8 +50,8 @@ app.get("/callback", function (request, response) {
     response.redirect('/');
   } else {
     response.sendFile(__dirname + '/views/callback.html');
+    
   }
-  
   spotifyApi.authorizationCodeGrant(authorizationCode)
   .then(function(data) {
 
@@ -62,7 +62,7 @@ app.get("/callback", function (request, response) {
     // Save the amount of seconds until the access token expired
     tokenExpirationEpoch = (new Date().getTime() / 1000) + data.body['expires_in'];
     console.log('Retrieved token. It expires in ' + Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) + ' seconds!');
-    topArtists();
+    spotifyApi.getMyTopTracks()
   }, function(err) {
     console.log('Something went wrong when retrieving the access token!', err.message);
   });
