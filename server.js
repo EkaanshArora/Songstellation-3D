@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
-
+app.set('view engine', 'html');
+app.engine('html', require('hbs').__express);
 // init Spotify API wrapper
 var SpotifyWebApi = require('spotify-web-api-node');
 var redirectUri = 'https://'+process.env.PROJECT_NAME+'.glitch.me/callback';
@@ -31,31 +32,33 @@ app.get("/callback", function (request, response) {
   if (!authorizationCode) {
     response.redirect('/');
   } else {
-    response.sendFile(__dirname + '/views/callback.html');
-  }
-  spotifyApi.authorizationCodeGrant(authorizationCode)
-  .then(function(data) {
-    // Set the access token and refresh token
-    spotifyApi.setAccessToken(data.body['access_token']);
-    spotifyApi.setRefreshToken(data.body['refresh_token']);
-    
-    // Save the amount of seconds until the access token expired
-    tokenExpirationEpoch = (new Date().getTime() / 1000) + data.body['expires_in'];
-    console.log('Retrieved token. It expires in ' + Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) + ' seconds!');
-    spotifyApi.getMyTopTracks({
-      time_range : "short_term",
-      limit : 10,
-      offset: 0
-    })
+    var dataToSendObj;
+    spotifyApi.authorizationCodeGrant(authorizationCode)
     .then(function(data) {
-        console.log(data.body);
-    })
-    .catch(function(err) {
+      // Set the access token and refresh token
+      spotifyApi.setAccessToken(data.body['access_token']);
+      spotifyApi.setRefreshToken(data.body['refresh_token']);
+      
+      // Save the amount of seconds until the access token expired
+      tokenExpirationEpoch = (new Date().getTime() / 1000) + data.body['expires_in'];
+      console.log('Retrieved token. It expires in ' + Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) + ' seconds!');
+      spotifyApi.getMyTopTracks({
+        time_range : "short_term",
+        limit : 10,
+        offset: 0
+      })
+      .then(function(data) {
+          console.log(data.body);
+          dataToSendObj = {'message': data.body};
+      })
+      .catch(function(err) {
         console.log('Unfortunately, something has gone wrong.', err.message);
+      });
+    }, function(err) {
+      console.log('Something went wrong when retrieving the access token!', err.message);
     });
-  }, function(err) {
-    console.log('Something went wrong when retrieving the access token!', err.message);
-  });
+    response.render(__dirname + '/views/callback.html',dataToSendObj);
+  }
 });
 
 // listen for requests :)
