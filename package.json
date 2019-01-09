@@ -7,8 +7,8 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.15.2",
-    "spotify-web-api-node": "^2.3.6"
+    "express": "^4.16.4",
+    "spotify-web-api-node": "^4.0.0"
   },
   "engines": {
     "node": "8.x"
