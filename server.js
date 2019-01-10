@@ -55,7 +55,7 @@ app.get("/callback", function (request, response) {
                         var urilist=[];
                         for (var x in data.body.items) {
                             var val = data.body.items[x];
-                            urilist.push(JSON.stringify(val.uri));
+                            urilist.push(JSON.stringify(val.artists.id));
                             tracktitlelist.push(JSON.stringify(val.name));
                         }
                         dataToSendObj = { 'message': tracktitlelist };
