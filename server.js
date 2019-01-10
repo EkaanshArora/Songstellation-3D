@@ -53,6 +53,7 @@ app.get("/callback", function (request, response) {
                         console.log(data.body.items);
                         var tracktitlelist = [];
                         var urilist = [];
+                        var genrelist=[];
                         for (var x in data.body.items) {
                             var val = data.body.items[x];
                             urilist.push(val.artists[0].id);
@@ -62,7 +63,10 @@ app.get("/callback", function (request, response) {
                         console.log(urilist);
                         spotifyApi.getArtists(urilist)
                             .then(function (dataa) {
-                                console.log("\n\n"+JSON.stringify(dataa.body.artists.));
+                                for(var i=0;i<10;i++){
+                                    genrelist.push(dataa.body.artists[i].genres[0]);
+                                    console.log(genrelist);
+                                }
                             })
                         response.render(__dirname + '/views/callback.html', dataToSendObj);
                     })
