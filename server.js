@@ -51,12 +51,13 @@ app.get("/callback", function (request, response) {
         offset: 0
       })
       .then(function(data) {
+        var tracktitlelist="";
         for(var x in data.body.items)
         {
           var val = data.body.items[x];
-          console.log(JSON.stringify(val)+"\n\n");
+          console.log(JSON.stringify(val.name)+"\n");
+          tracktitlelist=tracktitlelist+JSON.stringify(val.name)+'\n';
         }
-        var tracktitlelist=JSON.stringify(data.body.items)
         dataToSendObj = {'message': tracktitlelist};
         console.log(dataToSendObj);
         response.render(__dirname + '/views/callback.html',dataToSendObj);
