@@ -52,12 +52,14 @@ app.get("/callback", function (request, response) {
                     .then(function (data) {
                         console.log(data.body.items);
                         var tracktitlelist = [];
+                        var urilist=[];
                         for (var x in data.body.items) {
                             var val = data.body.items[x];
+                            urilist.push(JSON.stringify(val.uri));
                             tracktitlelist.push(JSON.stringify(val.name));
                         }
                         dataToSendObj = { 'message': tracktitlelist };
-                        console.log(dataToSendObj);
+                        console.log(urilist);
                         response.render(__dirname + '/views/callback.html', dataToSendObj);
                     })
             }, function (err) {
