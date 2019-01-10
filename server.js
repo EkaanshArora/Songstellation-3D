@@ -34,15 +34,13 @@ app.get("/callback", function (request, response) {
     // Check folks haven't just gone direct to the callback URL
     if (!authorizationCode) {
         response.redirect('/');
-    }
-      else {
+    } else {
         var dataToSendObj;
         spotifyApi.authorizationCodeGrant(authorizationCode)
             .then(function (data) {
                 // Set the access token and refresh token
                 spotifyApi.setAccessToken(data.body['access_token']);
                 spotifyApi.setRefreshToken(data.body['refresh_token']);
-
                 // Save the amount of seconds until the access token expired
                 tokenExpirationEpoch = (new Date().getTime() / 1000) + data.body['expires_in'];
                 console.log('Retrieved token. It expires in ' + Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) + ' seconds!');
@@ -52,11 +50,11 @@ app.get("/callback", function (request, response) {
                     offset: 0
                 })
                     .then(function (data) {
-                        var tracktitlelist = "";
+                        console.log(data.body.items);
+                        var tracktitlelist = [];
                         for (var x in data.body.items) {
                             var val = data.body.items[x];
-                            console.log(JSON.stringify(val.name) + "\n");
-                            tracktitlelist = tracktitlelist + JSON.stringify(val.name) + '\n';
+                            tracktitlelist.push(JSON.stringify(val.name));
                         }
                         dataToSendObj = { 'message': tracktitlelist };
                         console.log(dataToSendObj);
