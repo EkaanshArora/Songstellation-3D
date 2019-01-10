@@ -52,14 +52,18 @@ app.get("/callback", function (request, response) {
                     .then(function (data) {
                         console.log(data.body.items);
                         var tracktitlelist = [];
-                        var urilist=[];
+                        var urilist = [];
                         for (var x in data.body.items) {
                             var val = data.body.items[x];
-                            urilist.push(JSON.stringify(val.artists.id));
+                            urilist.push(val.artists[0].id);
                             tracktitlelist.push(JSON.stringify(val.name));
                         }
                         dataToSendObj = { 'message': tracktitlelist };
                         console.log(urilist);
+                        spotifyApi.getArtists(urilist)
+                            .then(function (dataa) {
+                                console.log("\n\n"+JSON.stringify(dataa.body.artists.));
+                            })
                         response.render(__dirname + '/views/callback.html', dataToSendObj);
                     })
             }, function (err) {
