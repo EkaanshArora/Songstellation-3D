@@ -59,7 +59,7 @@ app.get("/callback", function (request, response) {
                             urilist.push(val.artists[0].id);
                             tracktitlelist.push(JSON.stringify(val.name));
                         }
-                        dataToSendObj = { 'message': data.body.items };
+                        dataToSendObj = { 'message': tracktitlelist };
                         console.log(urilist);
                         spotifyApi.getArtists(urilist)
                             .then(function (dataa) {
