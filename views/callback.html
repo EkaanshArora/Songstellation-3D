@@ -20,7 +20,10 @@
       <p class="bold">Yeah buddy,</p>
       <p>You successfully authenticated with Spotify 👏</p>
       <p>
-         {{message}}
+         <script>
+           var x="{{message}}";
+           console.log(x[0].name);
+        </script>
       </p>
     </main>
 
