@@ -57,17 +57,17 @@ app.get("/callback", function (request, response) {
                         for (var x in data.body.items) {
                             var val = data.body.items[x];
                             urilist.push(val.artists[0].id);
-                            tracktitlelist.push(JSON.stringify(val.name));
+                            tracktitlelist.push(val.name);
                         }
-                        dataToSendObj = { 'message': data.body.items };
-                        console.log(urilist);
+                        dataToSendObj = { 'message': tracktitlelist };
+                        /*console.log(urilist);
                         spotifyApi.getArtists(urilist)
                             .then(function (dataa) {
                                 for(var i=0;i<10;i++){
                                     genrelist.push(dataa.body.artists[i].genres[0]);
                                     console.log(genrelist);
                                 }
-                            })
+                            })*/
                         response.render(__dirname + '/views/callback.html', dataToSendObj);
                     })
             }, function (err) {

@@ -20,8 +20,9 @@
       <p class="bold">Yeah buddy,</p>
       <p>You successfully authenticated with Spotify 👏</p>
       <script>
-        console.log("{{message.[0].name}}");
-      </script>
+        {{#each message}}
+          <li>{{this}}</li>
+        {{/each}}
     </main>
 
     <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>    
