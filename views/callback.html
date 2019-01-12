@@ -19,12 +19,9 @@
     <main>
       <p class="bold">Yeah buddy,</p>
       <p>You successfully authenticated with Spotify 👏</p>
-      <p>
-         <script>
-           var x="{{message}}";
-           console.log(x[0].name);
-        </script>
-      </p>
+      <script>
+        console.log("{{message.[0].name}}");
+      </script>
     </main>
 
     <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>    
