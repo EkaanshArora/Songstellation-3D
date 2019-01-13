@@ -1,80 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Constellation</title>
-		<script src="https://github.com/thenextweb/constellation/releases/download/v1.5.5/constellation.min.js"></script>
-	</head>
-	<body bgcolor=black>
-      <body bgcolor=black>
-          <img src="https://cdn.glitch.com/84c81516-4ef8-4c74-b86e-d86267571d35%2Fskyc.jpg?1547402187971" id="testimg"><style>#testimg{position: absolute; top: 0; left: 0; width: 100%; z-index: -1;}</style>
-      <header>
-        <h1>
-          Spotify Data Art
-        </h1>
-      </header>
-  
-      <main>
-        <div>
-          
-          <canvas id="can" width="1000">
-          </canvas>
-        </div>
-        <style>
-        #can {
-          
-        }
-        html{
-          color:white;
-          
-        }
-        </style>
-		<script>
-      var canvas = document.getElementById('can');
-      var aspectRatio = 0.6;
-      var songTitles=[];
-      {{#each message}}
-        songTitles.push("{{this}}");
-      {{/each}}
-      console.log(songTitles);
-      canvas.height = canvas.width * aspectRatio;
-      function writeText(x, y, text, ctx) {
-        ctx.font = "15px Arial";
-        ctx.fillStyle = "white";
-        ctx.textAlign = "center";
-        ctx.shadowBlur = 0;
-        ctx.fillText(text, x, y+20);
+
+<head>
+  <meta charset="utf-8">
+  <title>Constellation</title>
+  <script src="https://github.com/thenextweb/constellation/releases/download/v1.5.5/constellation.min.js"></script>
+</head>
+
+<body bgcolor=black>
+
+  <body bgcolor=black>
+    <img src="https://cdn.glitch.com/84c81516-4ef8-4c74-b86e-d86267571d35%2Fskyc.jpg?1547402187971" id="testimg">
+    <style>
+      #testimg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: -1
       }
-      var constellationInstance = window.constellation({
-        size: [canvas.width, canvas.height],
-        canvas: document.querySelector('canvas'),
-        padding: [0, 0],
-        starCount: 10,
-        lineCount: 15,
-        fuzziness: 10,
-        speed: {
-          active: 0,
-          passive: 0.02
-        },
-        style: {
-          starColor: '#fff',
-          lineColor: 'rgba(255,255,255,.5)',
-          lineSize: 1,
-          starPadding: 0,
-          starSize: 3
-        },
-        onDraw: {
-          afterFrame: (ctx, style, objects) => {
-            for(var i=0;i<10;i++)
-            writeText(objects.stars[i].pos[0], objects.stars[i].pos[1], songTitles[i], ctx)
-          },
-          afterStar: (ctx,style,star) => {
-            ctx.shadowBlur = 25;
-            ctx.shadowColor = "white";
-          }
+
+      html {
+        color: white
+      }
+    </style>
+    <header>
+      <h1>
+        Spotify Data Art
+      </h1>
+    </header>
+    <main>
+      <div>
+        <canvas id="can" width="1000">
+        </canvas>
+      </div>
+      <script>
+        function writeText(x, y, text, ctx) {
+          ctx.font = "15px Arial";
+          ctx.fillStyle = "white";
+          ctx.textAlign = "center";
+          ctx.shadowBlur = 0;
+          ctx.fillText(text, x, y + 20);
         }
-      });
-    </script>
-    </body>
-    
-    </html>
+        
+        var canvas = document.getElementById('can');
+        var aspectRatio = 0.6;
+        var songTitles = [];
+        {{#each message}}
+          songTitles.push("{{this}}");
+        {{/each}}
+        console.log(songTitles);
+        canvas.height = canvas.width * aspectRatio;
+        
+        var constellationInstance = window.constellation({
+          size: [canvas.width, canvas.height],
+          canvas: document.querySelector('canvas'),
+          padding: [0, 0],
+          starCount: 10,
+          lineCount: 15,
+          fuzziness: 10,
+          speed: {
+            active: 0,
+            passive: 0.02
+          },
+          style: {
+            starColor: '#fff',
+            lineColor: 'rgba(255,255,255,.5)',
+            lineSize: 1,
+            starPadding: 0,
+            starSize: 3
+          },
+          onDraw: {
+            afterFrame: (ctx, style, objects) => {
+              for (var i = 0; i < 10; i++)
+                writeText(objects.stars[i].pos[0], objects.stars[i].pos[1], songTitles[i], ctx)
+            },
+            afterStar: (ctx, style, star) => {
+              ctx.shadowBlur = 25;
+              ctx.shadowColor = "white";
+            }
+          }
+        });
+      </script>
+  </body>
+</html>
