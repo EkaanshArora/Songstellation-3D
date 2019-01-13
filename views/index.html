@@ -13,49 +13,6 @@
 </head>
 
 <body>
-    <style>
-        html {
-            background-color: black;
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center
-        }
-
-        body {
-            margin: 0
-        }
-
-        #canvas-layer-0 {
-            z-index: -1;
-            position: absolute;
-            top: 0
-        }
-
-        #canvas-layer-1 {
-            z-index: 1;
-            position: absolute;
-            top: 0
-        }
-
-        #canvas-layer-2 {
-            z-index: 2;
-            position: absolute;
-            top: 0
-        }
-
-        .center {
-            text-align: center;
-        }
-
-        a {
-            color: white
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 2em
-        }
-    </style>
     <canvas id="canvas-layer-0"></canvas>
     <canvas id="canvas-layer-1" width="1000"></canvas>
     <canvas id="canvas-layer-2" width="1000"></canvas>
@@ -66,11 +23,9 @@
         Generate a custom animated constellation based on your top spotify tracks. Made using Spotify API and
         <a href="https://github.com/thenextweb/constellation">constellation-canvas.</a>
     </p>
-    <div class="center">
         <a href="/authorize">
             <div class="button">Generate constellation!</div>
         </a>
-    </div>
     <script>
         var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
