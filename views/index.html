@@ -13,10 +13,10 @@
 </head>
 
 <body>
+    <div id="main">
     <canvas id="canvas-layer-0"></canvas>
     <canvas id="canvas-layer-1" width="1000"></canvas>
     <canvas id="canvas-layer-2" width="1000"></canvas>
-    <div id="main">
     <h1>
         Song Constellation
     </h1>
@@ -24,10 +24,9 @@
         Generate a custom animated constellation based on your top spotify tracks. Made using Spotify API and
         <a href="https://github.com/thenextweb/constellation">constellation-canvas.</a>
     </p>
-        <a href="/authorize">
-            <div class="button">Generate constellation!</div>
-        </a>
-    </div>
+    <a href="/authorize">
+        <div class="button">Generate constellation!</div>
+    </a>
     <script>
         var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -125,6 +124,6 @@
             }
         });
     </script>
+  </div>
 </body>
-
 </html>
