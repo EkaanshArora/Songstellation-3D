@@ -30,6 +30,8 @@
         z-index: 3;
       }
     </style>
+    <canvas id="canvas-layer-1" width="1000"></canvas>
+    <canvas id="canvas-layer-2" width="1000"></canvas>
     <header>
       <h1>
         Spotify Data Art
@@ -41,6 +43,9 @@
         </canvas>
       </div>
       <script>
+        var bgcanvas=document.getElementById('canvas-layer-1');
+        var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         var songTitles = [];
         {{#each message}}
           songTitles.push("{{this}}");
@@ -55,14 +60,11 @@
           ctx.fillText(text, x, y + 20);
         }
         
-        var bgcanvas=document.getElementById('canvas-layer-1');
-        var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-        var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         var constellationInstance1 = window.constellation({
           size: [w, h],
           canvas: document.getElementById('canvas-layer-1'),
           padding: [-50, -50],
-          starCount: 100,
+          starCount: 200,
           lineCount: 0,
           fuzziness: 10,
           speed: {
@@ -77,7 +79,7 @@
             starSize: 1
           },
           afterStar: (ctx, style, star) => {
-              ctx.shadowBlur = 25;
+              ctx.shadowBlur = 7;
               ctx.shadowColor = "white";
           }
         });
@@ -85,8 +87,6 @@
         var canvas = document.getElementById('can');
         var aspectRatio = 0.6;
         canvas.height = canvas.width * aspectRatio;
-        var songTitles = [];
-        console.log(songTitles);
         
         var constellationInstance2 = window.constellation({
           size: [canvas.width, canvas.height],
@@ -107,10 +107,11 @@
             starSize: 1.5
           },
           afterStar: (ctx, style, star) => {
-              ctx.shadowBlur = 25;
+              ctx.shadowBlur = 15;
               ctx.shadowColor = "white";
           }
         });
+          
         var constellationInstance = window.constellation({
           size: [canvas.width, canvas.height],
           canvas: document.getElementById('can'),
