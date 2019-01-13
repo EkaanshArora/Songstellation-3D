@@ -51,7 +51,7 @@
   <canvas id="canvas-layer-2" width="1000"></canvas>
   <header>
     <h1>
-      Spotify Data Art
+      Song Constellation
     </h1>
   </header>
   <main>
@@ -76,9 +76,21 @@
         {{#each message}}
           songTitles.push("{{this}}");
         {{/each}}
-
+      
+      var isMobile = function isMobileDevice() {
+        return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+      };
+      var fontSize="20px";
+      var starSizeAfterCheck=3;
+      var lineSizeAfterCheck=1;
+      if(isMobile===true)
+      {
+        fontSize="30px";
+        starSizeAfterCheck=5;
+        lineSizeAfterCheck=20;
+      }
       function writeText(x, y, text, ctx) {
-        ctx.font = "15px Arial";
+        ctx.font = fontSize+" Arial";
         ctx.fillStyle = "white";
         ctx.textAlign = "center";
         ctx.shadowBlur = 0;
@@ -150,9 +162,9 @@
         style: {
           starColor: '#fff',
           lineColor: 'rgba(255,255,255,.5)',
-          lineSize: 1,
+          lineSize: lineSizeAfterCheck,
           starPadding: 0,
-          starSize: 3
+          starSize: starSizeAfterCheck
         },
         onDraw: {
           afterFrame: (ctx, style, objects) => {
