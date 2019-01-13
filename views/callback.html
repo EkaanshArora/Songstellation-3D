@@ -22,7 +22,11 @@
       <canvas id="can">
       </canvas>
       <script>
-      
+      var xx=[];
+        {{#each message}}
+          xx.push({{this}});
+        {{/each}}
+      console.log(xx);
       </script>
       <ul>
         {{#each message}}
