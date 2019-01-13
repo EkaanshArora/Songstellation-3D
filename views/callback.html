@@ -50,7 +50,7 @@
   <canvas id="canvas-layer-1" width="1000"></canvas>
   <canvas id="canvas-layer-2" width="1000"></canvas>
   <header>
-    <h1>
+    <h1 id="page-title">
       Song Constellation
     </h1>
   </header>
@@ -77,17 +77,40 @@
           songTitles.push("{{this}}");
         {{/each}}
       
-      var isMobile = function isMobileDevice() {
-        return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+      var isMobile = {
+        Android: function() {
+          return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function() {
+          return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function() {
+          return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function() {
+          return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function() {
+          return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function() {
+          return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
       };
       var fontSize="20px";
-      var starSizeAfterCheck=3;
+      var starSizeAfterCheck1=1;
+      var starSizeAfterCheck2=2;
+      var starSizeAfterCheck3=3;
       var lineSizeAfterCheck=1;
-      if(isMobile===true)
+      if(isMobile.any())
       {
         fontSize="30px";
-        starSizeAfterCheck=5;
-        lineSizeAfterCheck=20;
+        starSizeAfterCheck1=2.5;
+        starSizeAfterCheck2=1.5;
+        starSizeAfterCheck3=7;
+        lineSizeAfterCheck=2;
+        document.getElementById("page-title").style.fontSize = "4em";
+        document.getElementById("page-title").style.marginTop = "2em"
       }
       function writeText(x, y, text, ctx) {
         ctx.font = fontSize+" Arial";
@@ -113,7 +136,7 @@
           lineColor: 'rgba(255,255,255,.5)',
           lineSize: 1,
           starPadding: 0,
-          starSize: 1
+          starSize: starSizeAfterCheck1
         },
         afterStar: (ctx, style, star) => {
           ctx.shadowBlur = 7;
@@ -141,7 +164,7 @@
           lineColor: 'rgba(255,255,255,.5)',
           lineSize: 1,
           starPadding: 0,
-          starSize: 1.5
+          starSize: starSizeAfterCheck2
         },
         afterStar: (ctx, style, star) => {
           ctx.shadowBlur = 15;
@@ -164,7 +187,7 @@
           lineColor: 'rgba(255,255,255,.5)',
           lineSize: lineSizeAfterCheck,
           starPadding: 0,
-          starSize: starSizeAfterCheck
+          starSize: starSizeAfterCheck3
         },
         onDraw: {
           afterFrame: (ctx, style, objects) => {
