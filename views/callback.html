@@ -43,9 +43,20 @@
         </canvas>
       </div>
       <script>
-        var bgcanvas=document.getElementById('canvas-layer-1');
+        
+        
         var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        var c = document.getElementById("canvas-layer-0");
+        c.height=h;
+        c.width=w;
+        var ctx = c.getContext("2d");
+        var grd = ctx.createLinearGradient(0, 0, w, h);
+        grd.addColorStop(0, "black");
+        grd.addColorStop(1, "#000525");
+        ctx.fillStyle = grd;
+        ctx.fillRect(0, 0, w, h);
+        
         var songTitles = [];
         {{#each message}}
           songTitles.push("{{this}}");
