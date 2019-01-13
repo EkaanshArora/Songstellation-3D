@@ -7,9 +7,7 @@
   <script src="https://github.com/thenextweb/constellation/releases/download/v1.5.5/constellation.min.js"></script>
 </head>
 
-<body bgcolor=black>
-
-  <body bgcolor=black>
+<body>
     <img src="https://cdn.glitch.com/84c81516-4ef8-4c74-b86e-d86267571d35%2Fskyc.jpg?1547402187971" id="testimg">
     <style>
       #testimg {
@@ -21,6 +19,7 @@
       }
 
       html {
+        background-color: black;
         color: white
       }
     </style>
@@ -55,13 +54,13 @@
         var constellationInstance = window.constellation({
           size: [canvas.width, canvas.height],
           canvas: document.querySelector('canvas'),
-          padding: [0, 0],
+          padding: [50, 50],
           starCount: 10,
           lineCount: 15,
           fuzziness: 10,
           speed: {
             active: 0,
-            passive: 0.02
+            passive: 0.03
           },
           style: {
             starColor: '#fff',
@@ -82,5 +81,6 @@
           }
         });
       </script>
+    </main>
   </body>
 </html>
