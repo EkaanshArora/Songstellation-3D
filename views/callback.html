@@ -8,19 +8,26 @@
 </head>
 
 <body>
-    <img src="https://cdn.glitch.com/84c81516-4ef8-4c74-b86e-d86267571d35%2Fskyc.jpg?1547402187971" id="testimg">
     <style>
-      #testimg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: -1
-      }
-
       html {
         background-color: black;
         color: white
+      }
+      body{
+        margin: 0
+      }
+      #canvas-layer-1{
+        z-index: 1;
+        position: absolute;
+        top: 0
+      }
+      #canvas-layer-2{
+        z-index: 2;
+        position: absolute;
+        top: 0
+      }
+      #can{
+        z-index: 3;
       }
     </style>
     <header>
@@ -34,6 +41,12 @@
         </canvas>
       </div>
       <script>
+        var songTitles = [];
+        {{#each message}}
+          songTitles.push("{{this}}");
+        {{/each}}
+        console.log(songTitles);
+        
         function writeText(x, y, text, ctx) {
           ctx.font = "15px Arial";
           ctx.fillStyle = "white";
@@ -42,18 +55,65 @@
           ctx.fillText(text, x, y + 20);
         }
         
+        var bgcanvas=document.getElementById('canvas-layer-1');
+        var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        var constellationInstance1 = window.constellation({
+          size: [w, h],
+          canvas: document.getElementById('canvas-layer-1'),
+          padding: [-50, -50],
+          starCount: 100,
+          lineCount: 0,
+          fuzziness: 10,
+          speed: {
+            active: 0,
+            passive: 0.03
+          },
+          style: {
+            starColor: '#fff',
+            lineColor: 'rgba(255,255,255,.5)',
+            lineSize: 1,
+            starPadding: 0,
+            starSize: 1
+          },
+          afterStar: (ctx, style, star) => {
+              ctx.shadowBlur = 25;
+              ctx.shadowColor = "white";
+          }
+        });
+        
         var canvas = document.getElementById('can');
         var aspectRatio = 0.6;
-        var songTitles = [];
-        {{#each message}}
-          songTitles.push("{{this}}");
-        {{/each}}
-        console.log(songTitles);
         canvas.height = canvas.width * aspectRatio;
+        var songTitles = [];
+        console.log(songTitles);
         
+        var constellationInstance2 = window.constellation({
+          size: [canvas.width, canvas.height],
+          canvas: document.getElementById('canvas-layer-2'),
+          padding: [-50, -50],
+          starCount: 100,
+          lineCount: 0,
+          fuzziness: 10,
+          speed: {
+            active: 0,
+            passive: 0.03
+          },
+          style: {
+            starColor: '#fff',
+            lineColor: 'rgba(255,255,255,.5)',
+            lineSize: 1,
+            starPadding: 0,
+            starSize: 1.5
+          },
+          afterStar: (ctx, style, star) => {
+              ctx.shadowBlur = 25;
+              ctx.shadowColor = "white";
+          }
+        });
         var constellationInstance = window.constellation({
           size: [canvas.width, canvas.height],
-          canvas: document.querySelector('canvas'),
+          canvas: document.getElementById('can'),
           padding: [50, 50],
           starCount: 10,
           lineCount: 15,
