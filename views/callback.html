@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Constellation</title>
+  <title>Songstellation</title>
   <script src="https://github.com/thenextweb/constellation/releases/download/v1.5.5/constellation.min.js"></script>
 </head>
 
@@ -38,7 +38,7 @@
 
     #can {
       z-index: 3;
-      margin: 0 10vw 0 10vw;
+      margin: 0 5vw 0 5vw;
     }
 
     h1 {
@@ -97,23 +97,25 @@
           return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
         }
       };
-      var fontSize="20px";
-      var starSizeAfterCheck1=1;
-      var starSizeAfterCheck2=2;
-      var starSizeAfterCheck3=3;
-      var lineSizeAfterCheck=1;
+      var fontSize="20px",
+      starSizeAfterCheck1=1,
+      starSizeAfterCheck2=2,
+      starSizeAfterCheck3=3,
+      lineSizeAfterCheck=1,
+      speedAfterCheck=0.06;
       if(isMobile.any())
       {
-        fontSize="30px";
+        fontSize="35px";
         starSizeAfterCheck1=2.5;
         starSizeAfterCheck2=1.5;
         starSizeAfterCheck3=7;
-        lineSizeAfterCheck=2;
+        lineSizeAfterCheck=3;
         document.getElementById("page-title").style.fontSize = "4em";
-        document.getElementById("page-title").style.marginTop = "2em"
+        document.getElementById("page-title").style.marginTop = "2em";
+        speedAfterCheck=0.1
       }
       function writeText(x, y, text, ctx) {
-        ctx.font = fontSize+" Arial";
+        ctx.font = fontSize+" sans-serif";
         ctx.fillStyle = "white";
         ctx.textAlign = "center";
         ctx.shadowBlur = 0;
@@ -129,7 +131,7 @@
         fuzziness: 10,
         speed: {
           active: 0,
-          passive: 0.06
+          passive: speedAfterCheck
         },
         style: {
           starColor: '#fff',
@@ -157,7 +159,7 @@
         fuzziness: 10,
         speed: {
           active: 0,
-          passive: 0.06
+          passive: speedAfterCheck
         },
         style: {
           starColor: '#fff',
@@ -174,13 +176,13 @@
       var constellationInstance = window.constellation({
         size: [w - 50, h - 50],
         canvas: document.getElementById('can'),
-        padding: [50, 50],
+        padding: [100, 100],
         starCount: 10,
         lineCount: 15,
         fuzziness: 10,
         speed: {
           active: 0,
-          passive: 0.06
+          passive: speedAfterCheck
         },
         style: {
           starColor: '#fff',
