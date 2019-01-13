@@ -16,6 +16,11 @@
       body{
         margin: 0
       }
+      #canvas-layer-0{
+        z-index: -1;
+        position: absolute;
+        top: 0
+      } 
       #canvas-layer-1{
         z-index: 1;
         position: absolute;
@@ -30,6 +35,7 @@
         z-index: 3;
       }
     </style>
+    <canvas id="canvas-layer-0"></canvas>
     <canvas id="canvas-layer-1" width="1000"></canvas>
     <canvas id="canvas-layer-2" width="1000"></canvas>
     <header>
@@ -43,8 +49,6 @@
         </canvas>
       </div>
       <script>
-        
-        
         var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         var c = document.getElementById("canvas-layer-0");
