@@ -31,7 +31,7 @@ app.get("/authorize", function (request, response) {
 // Exchange Authorization Code for an Access Token
 app.get("/callback", function (request, response) {
     var authorizationCode = request.query.code;
-    // Check folks haven't just gone direct to the callback URL
+    // Check if gone direct to the callback URL
     if (!authorizationCode) {
         response.redirect('/');
     } else {
@@ -76,7 +76,7 @@ app.get("/callback", function (request, response) {
     }
 });
 
-// listen for requests :)
+// listen for requests
 var listener = app.listen(process.env.PORT, function () {
     console.log('Your app is listening on port ' + listener.address().port);
 });
