@@ -243,7 +243,7 @@
           var context = c.getContext('2d');
           var elements = [];
           var cc = document.getElementById('can');
-          document.addEventListener('click', function (e) {
+          c.addEventListener('click', function (e) {
             var x = e.pageX - cc.offsetLeft;
             var y = e.pageY - cc.offsetTop;
             console.log(x+" "+y);
