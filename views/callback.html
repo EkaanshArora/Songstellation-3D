@@ -16,7 +16,8 @@
     }
 
     body {
-      margin: 0
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     #canvas-layer-0 {
@@ -46,13 +47,20 @@
       text-align: center;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+    
+    #footer{
+      position: absolute;
+      bottom: 5vh;
+      right: 5vw;
+      font-size: 1.1em;
+    }
   </style>
   <canvas id="canvas-layer-0"></canvas>
   <canvas id="canvas-layer-1" width="1000"></canvas>
   <canvas id="canvas-layer-2" width="1000"></canvas>
   <header>
     <h1 id="page-title">
-      Song Constellation
+      Spotify Constellation
     </h1>
   </header>
   <main>
@@ -205,10 +213,13 @@
       });
       constellationInstance.then(() => {
         document.getElementById("can").style.width = "80vw";
-        document.getElementById("can").style.height = "85vh"//"100vh"+"-"+canvas.offsetTop;
+        document.getElementById("can").style.height = "80vh"//"100vh"+"-"+canvas.offsetTop;
         console.log(speedAfterCheck);
       });
     </script>
+    <div id="footer">
+    Made by <a href="http://ekaansharora.github.io">Ekaansh Arora</a>
+  </div>
   </main>
 </body>
 
