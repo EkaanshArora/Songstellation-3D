@@ -50,28 +50,40 @@ app.get("/callback", function (request, response) {
                     offset: 0
                 })
                     .then(function (data) {
-                        if(1)//data.body.items[0])
-                        { console.log(data.body.items[0]);
+                        //check for old account if short_term data isn't available
+                        if (typeof data.body.items[0] == 'undefined') {
+                            spotifyApi.getMyTopTracks({
+                                time_range: "long_term",
+                                limit: 10,
+                                offset: 0
+                            })
+                                .then(function (data) {
+                                    console.log(data.body.items);
+                                    var tracktitlelist = [];
+                                    var urilist = [];
+                                    var genrelist = [];
+                                    for (var x in data.body.items) {
+                                        var val = data.body.items[x];
+                                        urilist.push(val.artists[0].id);
+                                        tracktitlelist.push(val.name);
+                                    }
+                                    dataToSendObj = { 'message': tracktitlelist };
+                                    response.render(__dirname + '/views/callback.html', dataToSendObj);
+                                })
                         }
-                        console.log(data.body.items);
-                        var tracktitlelist = [];
-                        var urilist = [];
-                        var genrelist=[];
-                        for (var x in data.body.items) {
-                            var val = data.body.items[x];
-                            urilist.push(val.artists[0].id);
-                            tracktitlelist.push(val.name);
+                        else {
+                            console.log(data.body.items);
+                            var tracktitlelist = [];
+                            var urilist = [];
+                            var genrelist = [];
+                            for (var x in data.body.items) {
+                                var val = data.body.items[x];
+                                urilist.push(val.artists[0].id);
+                                tracktitlelist.push(val.name);
+                            }
+                            dataToSendObj = { 'message': tracktitlelist };
+                            response.render(__dirname + '/views/callback.html', dataToSendObj);
                         }
-                        dataToSendObj = { 'message': tracktitlelist };
-                        /*console.log(urilist);
-                        spotifyApi.getArtists(urilist)
-                            .then(function (dataa) {
-                                for(var i=0;i<10;i++){
-                                    genrelist.push(dataa.body.artists[i].genres[0]);
-                                    console.log(genrelist);
-                                }
-                            })*/
-                        response.render(__dirname + '/views/callback.html', dataToSendObj);
                     })
             }, function (err) {
                 console.log('Something went wrong when retrieving the access token!', err.message);
