@@ -27,9 +27,9 @@
       </canvas>
     </div>
     <script>
-      var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-      var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-      var c = document.getElementById("canvas-layer-0");
+      var w = document.documentElement.clientWidth;
+      var h = document.documentElement.clientHeight;
+      var c = document.getElementById("canvas-layer-2");
       let starCoord;
       c.height = h;
       c.width = w;
@@ -118,7 +118,7 @@
       });
 
       var canvas = document.getElementById('can');
-      var aspectRatio = 0.7;
+      var aspectRatio = 0.6;
       canvas.height = canvas.width * aspectRatio;
       var constellationInstance2 = window.constellation({
         size: [w, h],
@@ -171,7 +171,6 @@
               starCoordTemp.push(objects.stars[i].pos);
             }
             delete starCoord;
-            console.log(canvas.width+" "+canvas.height);
             starCoord = Array.from(starCoordTemp);
           },
           afterStar: (ctx, style, star) => {
@@ -184,7 +183,6 @@
       constellationInstance.then(() => {
         document.getElementById("can").style.width = "80vw";
         document.getElementById("can").style.height = "80vh"//"100vh"+"-"+canvas.offsetTop;
-        console.log(speedAfterCheck);
       });
           
       (function () {
