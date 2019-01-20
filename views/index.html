@@ -32,8 +32,6 @@
         <div class="button" id="btn">Generate constellation!</div>
     </a>
     <script>
-        //var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-        //var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         var w = document.documentElement.clientWidth;
         var h = document.documentElement.clientHeight;      
         var c = document.getElementById("canvas-layer-0");
@@ -66,13 +64,15 @@
                 return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
             }
         };
-        var fontSize = "20px",
+      
+      var fontSize = "20px",
             starSizeAfterCheck1 = 1,
             starSizeAfterCheck2 = 2,
             starSizeAfterCheck3 = 3,
             lineSizeAfterCheck = 1,
             speedAfterCheck = 0.06;
-        if (isMobile.any()) {
+        
+      if (isMobile.any()) {
             fontSize = "35px";
             starSizeAfterCheck1 = 1.8;
             starSizeAfterCheck2 = 1;
@@ -82,7 +82,8 @@
             document.getElementById("titlehead").style.marginTop = "0.4em";
             document.getElementById("byline").style.fontSize = "1.1em";
         }
-        var constellationInstance1 = window.constellation({
+      
+      var constellationInstance1 = window.constellation({
             size: [w, h],
             canvas: document.getElementById('canvas-layer-1'),
             padding: [-50, -50],
@@ -129,6 +130,7 @@
                 ctx.shadowColor = "white";
             }
         });
+      
     </script>
   </div>
   <div id="footer">

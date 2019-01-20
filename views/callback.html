@@ -9,57 +9,10 @@
   <meta name="theme-color" content="#101025">
   <meta name="msapplication-navbutton-color" content="#101025">
   <meta name="apple-mobile-web-app-status-bar-style" content="#101025">
+  <link rel="stylesheet" href="/callback-style.css">
 </head>
 
 <body>
-  <style>
-    html {
-      background-color: black;
-      color: white
-    }
-    a {
-    color: white;
-    }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    #canvas-layer-0 {
-      z-index: -1;
-      position: absolute;
-      top: 0
-    }
-
-    #canvas-layer-1 {
-      z-index: 1;
-      position: absolute;
-      top: 0
-    }
-
-    #canvas-layer-2 {
-      z-index: 2;
-      position: absolute;
-      top: 0
-    }
-
-    #can {
-      z-index: 3;
-      margin: 0 5vw 0 5vw;
-    }
-
-    h1 {
-      text-align: center;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    #footer{
-      position: absolute;
-      bottom: 5vh;
-      right: 5vw;
-      font-size: 1.1em;
-    }
-  </style>
   <canvas id="canvas-layer-0"></canvas>
   <canvas id="canvas-layer-1" width="1000"></canvas>
   <canvas id="canvas-layer-2" width="1000"></canvas>
@@ -112,12 +65,14 @@
           return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
         }
       };
+          
       var fontSize="20px",
       starSizeAfterCheck1=1,
       starSizeAfterCheck2=2,
       starSizeAfterCheck3=3,
       lineSizeAfterCheck=1,
       speedAfterCheck=0.06;
+          
       if(isMobile.any())
       {
         fontSize="35px";
@@ -129,6 +84,7 @@
         document.getElementById("page-title").style.marginTop = "2em";
         speedAfterCheck=0.3;
       }
+          
       function writeText(x, y, text, ctx) {
         ctx.font = fontSize+" sans-serif";
         ctx.fillStyle = "white";
@@ -164,7 +120,6 @@
       var canvas = document.getElementById('can');
       var aspectRatio = 0.7;
       canvas.height = canvas.width * aspectRatio;
-
       var constellationInstance2 = window.constellation({
         size: [w, h],
         canvas: document.getElementById('canvas-layer-2'),
@@ -188,6 +143,7 @@
           ctx.shadowColor = "white";
         }
       });
+          
       var constellationInstance = window.constellation({
         size: [w - 50, h - 50],
         canvas: document.getElementById('can'),
@@ -223,37 +179,29 @@
           }
         }
       });
+          
       constellationInstance.then(() => {
         document.getElementById("can").style.width = "80vw";
         document.getElementById("can").style.height = "80vh"//"100vh"+"-"+canvas.offsetTop;
         console.log(speedAfterCheck);
       });
+          
       (function () {
           'use strict';
-          // Get mouse position
-          function getMousePos(c, evt) {
-            var rect = c.getBoundingClientRect();
-            return {
-              x: evt.clientX - rect.left,
-              y: evt.clientY - rect.top
-            };
-          };
-
           var c = document.getElementById('canvas-layer-2');
-          var context = c.getContext('2d');
-          var elements = [];
+          //var context = c.getContext('2d');
+          //var elements = [];
           var cc = document.getElementById('can');
           c.addEventListener('click', function (e) {
             var x = e.pageX - cc.offsetLeft;
             var y = e.pageY - cc.offsetTop;
             console.log(x+" "+y);
             starCoord.forEach(function (element, index) {
-              if (Math.pow(x - element[0], 2) + Math.pow(y - element[1], 2) < Math.pow(50, 2)) {
+              if (Math.pow(x - element[0], 2) + Math.pow(y - element[1], 2) < Math.pow(10, 2)) {
                 alert(index);
               }
             });
           });
-
         })();
     </script>
     <div id="footer">
