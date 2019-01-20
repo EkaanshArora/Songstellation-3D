@@ -113,8 +113,7 @@
         lineSizeAfterCheck=3;
         document.getElementById("page-title").style.fontSize = "4em";
         document.getElementById("page-title").style.marginTop = "2em";
-        speedAfterCheck=0.55;
-        console.log(speedAfterCheck);
+        speedAfterCheck=0.3;
       }
       function writeText(x, y, text, ctx) {
         ctx.font = fontSize+" sans-serif";
@@ -207,7 +206,7 @@
       constellationInstance.then(() => {
         document.getElementById("can").style.width = "80vw";
         document.getElementById("can").style.height = "85vh"//"100vh"+"-"+canvas.offsetTop;
-        console.log("done");
+        console.log(speedAfterCheck);
       });
     </script>
   </main>

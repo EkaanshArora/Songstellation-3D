@@ -50,7 +50,7 @@ app.get("/callback", function (request, response) {
                     offset: 0
                 })
                     .then(function (data) {
-                        console.log(data.body.items);
+                        //console.log(data.body.items);
                         var tracktitlelist = [];
                         var urilist = [];
                         var genrelist=[];
