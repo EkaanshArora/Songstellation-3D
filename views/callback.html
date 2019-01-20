@@ -247,9 +247,9 @@
             var x = e.pageX - cc.offsetLeft;
             var y = e.pageY - cc.offsetTop;
             console.log(x+" "+y);
-            starCoord.forEach(function (element) {
+            starCoord.forEach(function (element, index) {
               if (Math.pow(x - element[0], 2) + Math.pow(y - element[1], 2) < Math.pow(50, 2)) {
-                alert("asd");
+                alert(index);
               }
             });
           });
