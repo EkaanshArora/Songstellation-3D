@@ -101,7 +101,7 @@
         lineCount: 0,
         fuzziness: 10,
         speed: {
-          active: 0,
+          active: speedAfterCheck,
           passive: speedAfterCheck
         },
         style: {
@@ -125,7 +125,7 @@
         lineCount: 0,
         fuzziness: 10,
         speed: {
-          active: 0,
+          active: speedAfterCheck,
           passive: speedAfterCheck
         },
         style: {
@@ -142,7 +142,7 @@
       });
       
       var canvas = document.getElementById('can');
-      var aspectRatio = 0.6;
+      var aspectRatio = 0.5;
       canvas.height = canvas.width * aspectRatio;
       var constellationInstance = window.constellation({
         size: [w, h],
@@ -152,7 +152,7 @@
         lineCount: 15,
         fuzziness: 10,
         speed: {
-          active: 0,
+          active: speedAfterCheck,
           passive: speedAfterCheck
         },
         style: {
