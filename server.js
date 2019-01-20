@@ -45,12 +45,12 @@ app.get("/callback", function (request, response) {
                 tokenExpirationEpoch = (new Date().getTime() / 1000) + data.body['expires_in'];
                 console.log('Retrieved token. It expires in ' + Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) + ' seconds!');
                 spotifyApi.getMyTopTracks({
-                    time_range: "short_term",
+                    time_range: "long_term",
                     limit: 10,
                     offset: 0
                 })
                     .then(function (data) {
-                        //console.log(data.body.items);
+                        console.log(data.body.items);
                         var tracktitlelist = [];
                         var urilist = [];
                         var genrelist=[];
