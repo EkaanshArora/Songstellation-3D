@@ -73,3 +73,8 @@ h1 {
     margin: auto;
     margin-top: 10vh;
 }
+#footer{
+  position: absolute;
+  bottom: 5vh;
+  right: 5vw;
+}

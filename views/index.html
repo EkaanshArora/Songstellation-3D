@@ -29,8 +29,10 @@
         <div class="button">Generate constellation!</div>
     </a>
     <script>
-        var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-        var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        //var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        //var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        var w = document.documentElement.clientWidth;
+        var h = document.documentElement.clientHeight;      
         var c = document.getElementById("canvas-layer-0");
         c.height = h;
         c.width = w;
@@ -69,10 +71,11 @@
             speedAfterCheck = 0.06;
         if (isMobile.any()) {
             fontSize = "35px";
-            starSizeAfterCheck1 = 2.5;
-            starSizeAfterCheck2 = 1.5;
+            starSizeAfterCheck1 = 1.8;
+            starSizeAfterCheck2 = 1;
             starSizeAfterCheck3 = 7;
             lineSizeAfterCheck = 3;
+            document.getElementsByClassName("button").style.fontSize = "2em";
         }
         var constellationInstance1 = window.constellation({
             size: [w, h],
@@ -124,7 +127,7 @@
     </script>
   </div>
   <div id="footer">
-    Made by <a href="http://ekaansharora.github.io">Ekaansh Arora</a>.
+    Made by <a href="http://ekaansharora.github.io">Ekaansh Arora</a>
   </div>
 </body>
 </html>
