@@ -171,6 +171,7 @@
               starCoordTemp.push(objects.stars[i].pos);
             }
             delete starCoord;
+            console.log(canvas.width+" "+canvas.height);
             starCoord = Array.from(starCoordTemp);
           },
           afterStar: (ctx, style, star) => {
@@ -188,21 +189,21 @@
           
       (function () {
           'use strict';
-          var c = document.getElementById('canvas-layer-2');
-          //var context = c.getContext('2d');
-          //var elements = [];
-          var cc = document.getElementById('can');
-          c.addEventListener('click', function (e) {
-            var x = e.pageX - cc.offsetLeft;
-            var y = e.pageY - cc.offsetTop;
+          var cc = document.getElementById('canvas-layer-2');
+          var context = c.getContext('2d');
+          var elements = [];
+          cc.addEventListener('click', function (e) {
+            var x = e.pageX - canvas.offsetLeft;
+            var y = e.pageY - canvas.offsetTop;
             console.log(x+" "+y);
             starCoord.forEach(function (element, index) {
-              if (Math.pow(x - element[0], 2) + Math.pow(y - element[1], 2) < Math.pow(10, 2)) {
+              if (Math.pow(x - element[0], 2) + Math.pow(y - element[1], 2) < Math.pow(50, 2))
+              {
                 alert(index);
               }
             });
           });
-        })();
+      })();
     </script>
     <div id="footer">
     Made by <a href="http://ekaansharora.github.io">Ekaansh Arora</a>
