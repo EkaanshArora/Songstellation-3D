@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Constellation</title>
+</head>
+
+<body>
+    <style>
+        html {
+            background-color: black;
+            color: white
+        }
+      #particles-js {
+        width: 80vw;
+        height: 80vh;
+        text-align: center
+      }
+    </style>
+    <h1>
+        Spotify Data Art
+    </h1>
+    <div id="particles-js"></div>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS.load('particles-js', '/particlesjs-config.json', function () {
+            console.log('callback - particles.js config loaded');
+        });
+    </script>
+</body>
+
+</html>

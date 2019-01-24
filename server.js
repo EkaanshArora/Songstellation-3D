@@ -21,6 +21,10 @@ app.get("/", function (request, response) {
     response.sendFile(__dirname + '/views/index.html');
 });
 
+app.get("/test", function (request, response) {
+    response.sendFile(__dirname + '/views/test.html');
+});
+
 app.get("/authorize", function (request, response) {
     var scopesArray = ["user-top-read"]
     var authorizeURL = spotifyApi.createAuthorizeURL(scopesArray);
