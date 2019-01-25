@@ -20,8 +20,18 @@ var isMobile = {
 };
 let canvasPadding=150;
 let trackFontSize="20px Arial";
-particlesJSedit('particles-js',
+var linkDistance=400;
+if (isMobile.any()) {
+  
+  canvasPadding=150;
+  trackFontSize="34px Arial";
+  linkDistance=200;
+  document.getElementById("page-title").style.fontSize = "4em";
+  document.getElementById("page-title").style.marginTop = "2em";     
+  
+}
 
+particlesJSedit('particles-js',
   {
     "particles": {
       "number": {
@@ -71,7 +81,7 @@ particlesJSedit('particles-js',
       },
       "line_linked": {
         "enable": true,
-        "distance": 400,
+        "distance": linkDistance,
         "color": "#ffffff",
         "opacity": 1,
         "width": 1
@@ -246,9 +256,3 @@ particlesJS('bg-layer-0',
     "retina_detect": true
   }
 );
-
-if (isMobile.any()) {
-  
-  canvasPadding=150;
-  trackFontSize="28px Arial";
-}

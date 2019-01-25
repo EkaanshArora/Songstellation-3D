@@ -427,7 +427,7 @@ var epJS = function(tag_id, params){
         epJS.canvas.ctx.fillStyle = "white";
         epJS.canvas.ctx.textAlign = "center";
         epJS.canvas.ctx.shadowBlur = 0;
-        epJS.canvas.ctx.fillText(titleArray[p.index], p.x, p.y + 20);
+        epJS.canvas.ctx.fillText(titleArray[p.index].replace(/ *\([^)]*\) */g, ""), p.x, p.y + 35);
       break;
 
       case 'edge':
@@ -805,13 +805,13 @@ var epJS = function(tag_id, params){
       if(dist_mouse <= epJS.interactivity.modes.bubble.distance){
 
         if(ratio >= 0 && epJS.interactivity.status == 'mousemove'){
-          var rectw=epJS.canvas.ctx.measureText(artistArray[p.index]).width;
+          var rectw=epJS.canvas.ctx.measureText(artistArray[p.index].replace(/ *\([^)]*\) */g, "")).width;
+          var recth=epJS.canvas.ctx.measureText('M').width;
           epJS.canvas.ctx.font = trackFontSize;
-          var recth = parseInt(epJS.canvas.ctx.font.match(/\d+/), 10);
-          epJS.canvas.ctx.fillRect(p.x-rectw/2-10, p.y-60, rectw+20, recth+10);
+          epJS.canvas.ctx.fillRect(p.x-rectw/2-10, p.y-recth-30, rectw+20, recth+20);
           epJS.canvas.ctx.fillStyle = "black";
           epJS.canvas.ctx.shadowBlur = 0;
-          epJS.canvas.ctx.fillText(artistArray[p.index],p.x, p.y-40);
+          epJS.canvas.ctx.fillText(artistArray[p.index].replace(/ *\([^)]*\) */g, ""),p.x, p.y-20);
           p.vx=0;
           p.vy=0;
         }
