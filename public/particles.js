@@ -423,7 +423,7 @@ var epJS = function(tag_id, params){
 
       case 'circle':
         epJS.canvas.ctx.arc(p.x, p.y, radius, 0, Math.PI * 2, false);
-        epJS.canvas.ctx.font = "15px Arial";
+        epJS.canvas.ctx.font = "18px Arial";
         epJS.canvas.ctx.fillStyle = "white";
         epJS.canvas.ctx.textAlign = "center";
         epJS.canvas.ctx.shadowBlur = 0;
@@ -806,7 +806,7 @@ var epJS = function(tag_id, params){
 
         if(ratio >= 0 && epJS.interactivity.status == 'mousemove'){
           epJS.canvas.ctx.fillRect(p.x-100, p.y-60, 200, 50);
-          epJS.canvas.ctx.font = "15px Arial";
+          epJS.canvas.ctx.font = "18px Arial";
           epJS.canvas.ctx.fillStyle = "black";
           epJS.canvas.ctx.textAlign = "center";
           epJS.canvas.ctx.shadowBlur = 0;
