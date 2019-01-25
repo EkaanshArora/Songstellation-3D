@@ -19,10 +19,13 @@
   <div id="bg-layer-0"></div>
   <script>
     let titleArray = [];
-        {{#each message}}
+        {{#each tracks}}
           titleArray.push("{{this}}");
         {{/each}}
-    let artistArray = ["00", "11", "22", "33", "44", '55', '66', '77', '88', '99'];
+    let artistArray = [];
+        {{#each artists}}
+          artistArray.push("{{this}}");
+        {{/each}}
   </script>
   <!-- scripts -->
   <script src="/particles.js"></script>
