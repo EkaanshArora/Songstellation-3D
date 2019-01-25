@@ -25,9 +25,7 @@ if (isMobile.any()) {
   
   canvasPadding=150;
   trackFontSize="34px Arial";
-  linkDistance=200;
-  document.getElementById("page-title").style.fontSize = "4em";
-  document.getElementById("page-title").style.marginTop = "2em";     
+  linkDistance=200;   
   
 }
 
