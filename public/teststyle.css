@@ -20,3 +20,11 @@ html {
   height: 100%;
   pointer-events: none
 }
+#save{
+  position: absolute;
+  top: 25;
+  right: 25;
+}
+#canvas-save{
+  visibility: hidden;
+}

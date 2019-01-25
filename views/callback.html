@@ -17,12 +17,13 @@
   <h1>
     Spotify Constellation
   </h1>
-  <div id="save">
-    
+  <div id="save" onclick="saveCanvas()">
+    save
   </div>
   <!-- particles.js container -->
   <div id="particles-js"></div>
   <div id="bg-layer-0"></div>
+  <canvas id="canvas-save"></canvas>
   <script>
     let titleArray = [];
         {{#each tracks}}
@@ -37,7 +38,22 @@
   <script src="/particles.js"></script>
   <script src="/particles.min.js"></script>
   <script src="/app.js"></script>
-
+  <script>
+    function saveCanvas()
+    {
+      var canvasList = document.getElementsByClassName("particles-js-canvas-el");
+      var canvas = document.getElementById("canvas-save");
+      var ctx = canvas.getContext("2d");
+      ctx.fillRect(0, 0, 150, 100);
+      ctx.drawImage(canvasList[0],0,0);
+      ctx.drawImage(canvasList[1],0,0);
+      
+      var img    = canvas.toDataURL("image/png");
+      document.write('<img src="'+img+'"/>');
+    }
+    
+  </script>
+  
 </body>
 
 </html>
