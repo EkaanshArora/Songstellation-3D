@@ -146,7 +146,7 @@ particlesJS('bg-layer-0',
   {
     "particles": {
       "number": {
-        "value": 250,
+        "value": 300,
         "density": {
           "enable": false,
           "value_area": 20

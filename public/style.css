@@ -79,9 +79,9 @@ h1 {
     font-size: 2.5em;
   }
   #btn{
-    font-size: 1.3em;
+    font-size: 1.2em;
   }
-  p{
-    font-size: 0.8em;
+  #byline{
+  font-size: 1em;
   }
 }
