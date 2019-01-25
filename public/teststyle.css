@@ -3,6 +3,7 @@ html {
   color: white;
   text-align: center;
   font-family: sans-serif;
+  overflow-y: hidden;
 }
 #particles-js{
   text-align: center;
@@ -21,10 +22,7 @@ html {
   pointer-events: none
 }
 #save{
-  position: absolute;
   text-align: center;
-  top: 10vh;
-  right: 50vh;
   cursor: pointer;
   text-decoration: underline;
 }
