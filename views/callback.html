@@ -3,9 +3,10 @@
 
 <head>
   <meta charset="utf-8">
-  <title>particles.js</title>
-  <meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
-  <meta name="author" content="Vincent Garreau" />
+  <title>Spotify Constellation</title>
+  <meta name="description" content="Make a constellation out of your spotify top ten tracks - Ekaansh Arora">
+  <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+  <meta name="author" content="Ekaansh Arora" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" media="screen" href="/teststyle.css">
   <meta name="theme-color" content="#000">
@@ -49,16 +50,14 @@
       ctx.fillRect(0, 0, canvasList[0].width, canvasList[0].height);
       ctx.drawImage(canvasList[0],0,0);
       ctx.drawImage(canvasList[1],0,0);
-      var img    = canvas.toDataURL("image/png");
     }
     function downloadCanvas(link, canvasId, filename) {
-    link.href = document.getElementById(canvasId).toDataURL();
-    link.download = filename;
+      link.href = document.getElementById(canvasId).toDataURL();
+      link.download = filename;
     }
-    
     document.getElementById('save').addEventListener('click', function() {
       saveCanvas();  
-      downloadCanvas(this, 'canvas-save', 'Spotify-Con.png');
+      downloadCanvas(this, 'canvas-save', 'spotify-constellation.glitch.me.png');
     }, false);
     
   </script>

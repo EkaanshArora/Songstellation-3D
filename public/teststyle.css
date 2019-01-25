@@ -22,8 +22,20 @@ html {
 }
 #save{
   position: absolute;
-  top: 5vh;
-  right: 5vh;
+  text-align: center;
+  top: 10vh;
+  right: 50vh;
+  cursor: pointer;
+  text-decoration: underline;
+}
+#save:visited{
+  color:white;
+}
+#save:active{
+  color:white;
+}
+#save:link {
+   color: white;
 }
 #canvas-save{
   visibility: hidden;
