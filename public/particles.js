@@ -254,10 +254,10 @@ var epJS = function(tag_id, params){
     this.y = position ? position.y : Math.random() * epJS.canvas.h;
 
     /* check position  - into the canvas */
-    if(this.x > epJS.canvas.w - this.radius*2 - 300) this.x = this.x - this.radius - 300;
-    else if(this.x < this.radius*2 + 300) this.x = this.x + this.radius+300;
-    if(this.y > epJS.canvas.h - this.radius*2 - 300) this.y = this.y - this.radius-300;
-    else if(this.y < this.radius*2 + 300) this.y = this.y + this.radius+300;
+    if(this.x > epJS.canvas.w - this.radius*2 - canvasPadding) this.x = this.x - this.radius - canvasPadding;
+    else if(this.x < this.radius*2 + canvasPadding) this.x = this.x + this.radius+canvasPadding;
+    if(this.y > epJS.canvas.h - this.radius*2 - canvasPadding) this.y = this.y - this.radius-canvasPadding;
+    else if(this.y < this.radius*2 + canvasPadding) this.y = this.y + this.radius+canvasPadding;
 
     /* check position - avoid overlap */
     if(epJS.particles.move.bounce){
@@ -585,13 +585,13 @@ var epJS = function(tag_id, params){
         p.x = Math.random() * epJS.canvas.w;
       }
 
-      /* out of canvas modes + 300 */
+      /* out of canvas modes + canvasPadding */
       switch(epJS.particles.move.out_mode){
         case 'bounce':
-          if (p.x + p.radius + 300 > epJS.canvas.w) p.vx = -p.vx;
-          else if (p.x - p.radius - 300 < 0) p.vx = -p.vx;
-          if (p.y + p.radius + 300 > epJS.canvas.h) p.vy = -p.vy;
-          else if (p.y - p.radius - 300 < 0) p.vy = -p.vy;
+          if (p.x + p.radius + canvasPadding > epJS.canvas.w) p.vx = -p.vx;
+          else if (p.x - p.radius - canvasPadding < 0) p.vx = -p.vx;
+          if (p.y + p.radius + canvasPadding > epJS.canvas.h) p.vy = -p.vy;
+          else if (p.y - p.radius - canvasPadding < 0) p.vy = -p.vy;
         break;
       }
 
@@ -811,7 +811,7 @@ var epJS = function(tag_id, params){
           epJS.canvas.ctx.textAlign = "center";
           epJS.canvas.ctx.shadowBlur = 0;
           epJS.canvas.ctx.fillText(artistArray[p.index],p.x, p.y-40);
-          p.vy=0;
+          p.vx=0;
           p.vy=0;
         }
 
