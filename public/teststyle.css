@@ -22,9 +22,13 @@ html {
 }
 #save{
   position: absolute;
-  top: 25;
-  right: 25;
+  top: 5vh;
+  right: 5vh;
 }
 #canvas-save{
   visibility: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 0;
 }

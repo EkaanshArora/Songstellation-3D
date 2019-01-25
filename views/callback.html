@@ -17,9 +17,9 @@
   <h1>
     Spotify Constellation
   </h1>
-  <div id="save" onclick="saveCanvas()">
-    save
-  </div>
+  <a id="save">
+    Download
+  </a>
   <!-- particles.js container -->
   <div id="particles-js"></div>
   <div id="bg-layer-0"></div>
@@ -43,14 +43,23 @@
     {
       var canvasList = document.getElementsByClassName("particles-js-canvas-el");
       var canvas = document.getElementById("canvas-save");
+      canvas.width  = canvasList[0].width;
+      canvas.height = canvasList[0].height;
       var ctx = canvas.getContext("2d");
-      ctx.fillRect(0, 0, 150, 100);
+      ctx.fillRect(0, 0, canvasList[0].width, canvasList[0].height);
       ctx.drawImage(canvasList[0],0,0);
       ctx.drawImage(canvasList[1],0,0);
-      
       var img    = canvas.toDataURL("image/png");
-      document.write('<img src="'+img+'"/>');
     }
+    function downloadCanvas(link, canvasId, filename) {
+    link.href = document.getElementById(canvasId).toDataURL();
+    link.download = filename;
+    }
+    
+    document.getElementById('save').addEventListener('click', function() {
+      saveCanvas();  
+      downloadCanvas(this, 'canvas-save', 'Spotify-Con.png');
+    }, false);
     
   </script>
   
