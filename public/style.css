@@ -8,21 +8,17 @@ a {
     color: white;
 }
 
-p {
-    text-align: center;
-    font-size: 1.3em;
-    padding: 4vw;
-}
-
 h1 {
     text-align: center;
-    margin-top: 1.2em;
-    padding: 10vh;
-    font-size: 2.5em;
+    margin-top: 1.5em;
+    padding: 7vh;
+    font-size: 3em;
 }
 
 #byline{
   font-size: 1.3em;
+  text-align: center;
+  padding: 4vw;
 }
 
 .particles-js-canvas-el{
@@ -42,7 +38,7 @@ h1 {
     border: 2px solid white;
     cursor: pointer;
     padding: 1em;
-    width: 50vw;
+    width: 40vw;
     line-height: 1.5em;
     text-align: center;
     text-decoration: none;
