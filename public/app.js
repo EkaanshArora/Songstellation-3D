@@ -1,7 +1,9 @@
 let canvasPadding=150;
 let trackFontSize="20px Arial";
+let imageTitleFont="bold 40px Arial"
+let imageSubFont="20px Arial";
 var linkDistance=400;
-let imageFont="bold 40px Arial"
+
 var isMobile = {
   Android: function () {
     return navigator.userAgent.match(/Android/i);
@@ -27,7 +29,8 @@ if (isMobile.any()) {
   canvasPadding=150;
   trackFontSize="34px Arial";
   linkDistance=200;
-  imageFont="bold 60px Arial"
+  imageTitleFont="bold 60px Arial";
+  imageSubFont="30px Arial";
 }
 
 particlesJSedit('particles-js',
