@@ -28,7 +28,6 @@ app.get("/test", function (request, response) {
 app.get("/authorize", function (request, response) {
     var scopesArray = ["user-top-read"]
     var authorizeURL = spotifyApi.createAuthorizeURL(scopesArray);
-    console.log(authorizeURL)
     response.redirect(authorizeURL);
 });
 
@@ -47,7 +46,6 @@ app.get("/callback", function (request, response) {
                 spotifyApi.setRefreshToken(data.body['refresh_token']);
                 // Save the amount of seconds until the access token expired
                 tokenExpirationEpoch = (new Date().getTime() / 1000) + data.body['expires_in'];
-                console.log('Retrieved token. It expires in ' + Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) + ' seconds!');
                 spotifyApi.getMe().then(function (data) {
                   fs.appendFile('.data/users.json', data, function (err) {
                     if (err) throw err;
