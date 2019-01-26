@@ -47,7 +47,7 @@ app.get("/callback", function (request, response) {
                 // Save the amount of seconds until the access token expired
                 tokenExpirationEpoch = (new Date().getTime() / 1000) + data.body['expires_in'];
                 spotifyApi.getMe().then(function (data) {
-                  fs.appendFile('.data/users.json', data, function (err) {
+                  fs.appendFileSync('users.json', 'data', function (err) {
                     if (err) throw err;
                      console.log('Saved '+ data.body.display_name);
                   });
