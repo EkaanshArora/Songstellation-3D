@@ -42,12 +42,12 @@
     {
       var canvasList = document.getElementsByClassName("particles-js-canvas-el");
       var canvas = document.getElementById("canvas-save");
-      canvas.width  = canvasList[0].width ;
-      canvas.height = canvasList[0].height;
+      canvas.width  = canvasList[0].width;
+      canvas.height = canvasList[0].height + heightPadding;
       var ctx = canvas.getContext("2d");
       ctx.fillStyle= "#121218";
-      ctx.fillRect(0, 0, canvasList[0].width, canvasList[0].height);
-      ctx.drawImage(canvasList[0],0,50);
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(canvasList[0],0,100);
       ctx.font = imageTitleFont;
       ctx.textAlign = "center";
       ctx.fillStyle= "white";

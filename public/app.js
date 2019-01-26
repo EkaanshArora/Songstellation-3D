@@ -2,6 +2,7 @@ let canvasPadding=150;
 let trackFontSize="20px Arial";
 let imageTitleFont="bold 40px Arial"
 let imageSubFont="20px Arial";
+let heightPadding=200;
 var linkDistance=400;
 
 var isMobile = {
@@ -31,6 +32,7 @@ if (isMobile.any()) {
   linkDistance=200;
   imageTitleFont="bold 60px Arial";
   imageSubFont="30px Arial";
+  heightPadding=50;
 }
 
 particlesJSedit('particles-js',
