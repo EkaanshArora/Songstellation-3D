@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 
-var datastore = require("./datastore").async;
+var datastore = require("./datastore.js").async;
 
 app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
