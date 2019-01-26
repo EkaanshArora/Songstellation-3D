@@ -1,35 +1,11 @@
 var express = require('express');
 var app = express();
-var mongodb = require('mongodb');
-var uri = 'mongodb://'+process.env.USER+':'+process.env.PASS+'@'+process.env.HOST+':'+process.env.PORT+'/'+process.env.DB;
-var seedData = [
-  {
-    decade: '1970s',
-    artist: 'Debby Boone',
-    song: 'You Light Up My Life',
-    weeksAtOne: 10
-  },
-  {
-    decade: '1980s',
-    artist: 'Olivia Newton-John',
-    song: 'Physical',
-    weeksAtOne: 10
-  },
-  {
-    decade: '1990s',
-    artist: 'Mariah Carey',
-    song: 'One Sweet Day',
-    weeksAtOne: 16
-  }
-];
-
 app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
 
 // init Spotify API wrapper
 var SpotifyWebApi = require('spotify-web-api-node');
 var redirectUri = 'https://' + process.env.PROJECT_NAME + '.glitch.me/callback';
-var tokenExpirationEpoch;
 var spotifyApi = new SpotifyWebApi({
 	clientId: process.env.CLIENT_ID,
 	clientSecret: process.env.CLIENT_SECRET,
@@ -39,26 +15,6 @@ var spotifyApi = new SpotifyWebApi({
 app.use(express.static('public'));
 
 app.get("/", function(request, response) {
-  mongodb.MongoClient.connect(uri, function(err, db) {
-	  if (err) throw err;
-	  var songs = db.collection('songstellation');
-	  songs.insert(seedData, function(err, result) {
-	  	if (err) throw err;
-  		songs.update({
-  				song: 'One Sweet Day'
-  			}, {
-  				$set: {
-  					artist: 'Mariah Carey ft. Boyz II Men'
-  				}
-  			},
-  			function(err, result) {
-  				if (err) throw err;
-  			});
-  	});
-  	db.close(function(err) {
-  		if (err) throw err;
-  	});
-  });
 	response.sendFile(__dirname + '/views/index.html');
 });
 
@@ -82,18 +38,15 @@ app.get("/callback", function(request, response) {
 		var dataToSendObj;
 		spotifyApi.authorizationCodeGrant(authorizationCode)
 			.then(function(data) {
-				// Set the access token and refresh token
 				spotifyApi.setAccessToken(data.body['access_token']);
 				spotifyApi.setRefreshToken(data.body['refresh_token']);
-				// Save the amount of seconds until the access token expired
-				tokenExpirationEpoch = (new Date().getTime() / 1000) + data.body['expires_in'];
 				spotifyApi.getMyTopTracks({
 						time_range: "short_term",
 						limit: 10,
 						offset: 0
 					})
 					.then(function(data) {
-						//check for old account if short_term data isn't available
+						//check for old data if short_term data isn't available
 						if (typeof data.body.items[0] == 'undefined') {
 							spotifyApi.getMyTopTracks({
 									time_range: "long_term",
