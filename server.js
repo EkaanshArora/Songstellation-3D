@@ -49,7 +49,10 @@ app.get("/callback", function (request, response) {
                 tokenExpirationEpoch = (new Date().getTime() / 1000) + data.body['expires_in'];
                 console.log('Retrieved token. It expires in ' + Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) + ' seconds!');
                 spotifyApi.getMe().then(function (data) {
-                  console.log(data);
+                  fs.appendFile('.data/users.json', data, function (err) {
+                    if (err) throw err;
+                     console.log('Saved '+ data.body.display_name);
+                  });
                 });
                 spotifyApi.getMyTopTracks({
                     time_range: "short_term",
@@ -65,7 +68,6 @@ app.get("/callback", function (request, response) {
                                 offset: 0
                             })
                                 .then(function (data) {
-                                    console.log(data.body.items);
                                     var tracks = [];
                                     var artists = [];
                                     for (var x in data.body.items) {
@@ -81,7 +83,6 @@ app.get("/callback", function (request, response) {
                                 })
                         }
                         else {
-                            console.log(data.body.items);
                             var tracks = [];
                             var artists = [];
                             for (var x in data.body.items) {
