@@ -48,6 +48,9 @@ app.get("/callback", function (request, response) {
                 // Save the amount of seconds until the access token expired
                 tokenExpirationEpoch = (new Date().getTime() / 1000) + data.body['expires_in'];
                 console.log('Retrieved token. It expires in ' + Math.floor(tokenExpirationEpoch - new Date().getTime() / 1000) + ' seconds!');
+                spotifyApi.getMe().then(function (data) {
+                  console.log(data);
+                });
                 spotifyApi.getMyTopTracks({
                     time_range: "short_term",
                     limit: 10,
