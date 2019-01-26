@@ -28,7 +28,8 @@
 }
 
 .button:hover {
-    background-color: rgb(0, 0, 0, 0.5)
+    background-color: #141419;
+    /*rgb(0, 0, 0, 0.5)*/
 }
 
 .button:active {
@@ -36,9 +37,9 @@
 }
 
 html {
-    background-color: black;
+    background-color: #101015;
     color: white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Helvetica, Tahoma, Geneva, Verdana, sans-serif;
 }
 
 a {
