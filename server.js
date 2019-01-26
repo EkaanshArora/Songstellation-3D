@@ -1,8 +1,10 @@
 var express = require('express');
 var app = express();
-
-var datastore = require("./datastore.js").async;
-
+var mongodb = require('mongodb');
+var uri = 'mongodb://'+process.env.USER+':'+process.env.PASS+'@'+process.env.HOST+':'+process.env.PORT+'/'+process.env.DB;
+mongodb.MongoClient.connect(uri, function(err, db) {
+if(err) throw err;
+}
 app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
 
@@ -18,22 +20,22 @@ var spotifyApi = new SpotifyWebApi({
 
 app.use(express.static('public'));
 
-app.get("/", function (request, response) {
+app.get("/", function(request, response) {
 	response.sendFile(__dirname + '/views/index.html');
 });
 
-app.get("/test", function (request, response) {
+app.get("/test", function(request, response) {
 	response.sendFile(__dirname + '/views/test.html');
 });
 
-app.get("/authorize", function (request, response) {
+app.get("/authorize", function(request, response) {
 	var scopesArray = ["user-top-read"]
 	var authorizeURL = spotifyApi.createAuthorizeURL(scopesArray);
 	response.redirect(authorizeURL);
 });
 
 // Exchange Authorization Code for an Access Token
-app.get("/callback", function (request, response) {
+app.get("/callback", function(request, response) {
 	var authorizationCode = request.query.code;
 	// Check if gone direct to the callback URL
 	if (!authorizationCode) {
@@ -41,26 +43,26 @@ app.get("/callback", function (request, response) {
 	} else {
 		var dataToSendObj;
 		spotifyApi.authorizationCodeGrant(authorizationCode)
-			.then(function (data) {
+			.then(function(data) {
 				// Set the access token and refresh token
 				spotifyApi.setAccessToken(data.body['access_token']);
 				spotifyApi.setRefreshToken(data.body['refresh_token']);
 				// Save the amount of seconds until the access token expired
 				tokenExpirationEpoch = (new Date().getTime() / 1000) + data.body['expires_in'];
 				spotifyApi.getMyTopTracks({
-					time_range: "short_term",
-					limit: 10,
-					offset: 0
-				})
-					.then(function (data) {
+						time_range: "short_term",
+						limit: 10,
+						offset: 0
+					})
+					.then(function(data) {
 						//check for old account if short_term data isn't available
 						if (typeof data.body.items[0] == 'undefined') {
 							spotifyApi.getMyTopTracks({
-								time_range: "long_term",
-								limit: 10,
-								offset: 0
-							})
-								.then(function (data) {
+									time_range: "long_term",
+									limit: 10,
+									offset: 0
+								})
+								.then(function(data) {
 									var tracks = [];
 									var artists = [];
 									for (var x in data.body.items) {
@@ -74,8 +76,7 @@ app.get("/callback", function (request, response) {
 									};
 									response.render(__dirname + '/views/callback.html', dataToSendObj);
 								})
-						}
-						else {
+						} else {
 							var tracks = [];
 							var artists = [];
 							for (var x in data.body.items) {
@@ -90,44 +91,12 @@ app.get("/callback", function (request, response) {
 							response.render(__dirname + '/views/callback.html', dataToSendObj);
 						}
 					})
-			}, function (err) {
+			}, function(err) {
 				console.log('Something went wrong when retrieving the access token!', err.message);
 			});
 	}
 });
 
-// listen for requests
-var listener = app.listen(process.env.PORT, function () {
+var listener = app.listen(process.env.PORT, function() {
 	console.log('Your app is listening on port ' + listener.address().port);
 });
-
-function connectOnProjectCreation() {
-  return new Promise(function (resolving) {
-    if(!connected){
-      connected = datastore.connect().then(function(){
-        resolving();
-      });
-    } else {
-      resolving();
-    }
-  });
-}
-
-function initializeDatastoreOnProjectCreation() {
-  return new Promise(function (resolving) {
-    datastore.get("initialized")
-      .then(function(init){
-        if (!init) {
-          datastore.set("posts", initialPosts)
-            .then(function(){
-              datastore.set("initialized", true)
-                .then(function(){
-                  resolving();
-                });
-            });
-        } else {
-          resolving();
-        }
-      });
-  });
-}
