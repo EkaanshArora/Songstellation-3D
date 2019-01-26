@@ -9,7 +9,8 @@
   "dependencies": {
     "express": "^4.16.4",
     "hbs": "^4.0.1",
-    "spotify-web-api-node": "^4.0.0"
+    "spotify-web-api-node": "^4.0.0",
+    "mongodb": "2.x"
   },
   "engines": {
     "node": "8.x"

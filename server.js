@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
-var fs = require('fs');
+
+var datastore = require("./datastore").async;
 
 app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
@@ -89,14 +90,6 @@ app.get("/callback", function (request, response) {
 							response.render(__dirname + '/views/callback.html', dataToSendObj);
 						}
 					})
-				spotifyApi.getMe().then(function (data) {
-					fs.appendFileSync('users.json', '', function (err) {
-						if (err) throw err;
-						console.log(err + " "+err.message + data.body.display_name);
-					});
-				}, function (err) {
-				  console.log('Something went wrong saving user!', err.message);
-			  });
 			}, function (err) {
 				console.log('Something went wrong when retrieving the access token!', err.message);
 			});
@@ -107,3 +100,34 @@ app.get("/callback", function (request, response) {
 var listener = app.listen(process.env.PORT, function () {
 	console.log('Your app is listening on port ' + listener.address().port);
 });
+
+function connectOnProjectCreation() {
+  return new Promise(function (resolving) {
+    if(!connected){
+      connected = datastore.connect().then(function(){
+        resolving();
+      });
+    } else {
+      resolving();
+    }
+  });
+}
+
+function initializeDatastoreOnProjectCreation() {
+  return new Promise(function (resolving) {
+    datastore.get("initialized")
+      .then(function(init){
+        if (!init) {
+          datastore.set("posts", initialPosts)
+            .then(function(){
+              datastore.set("initialized", true)
+                .then(function(){
+                  resolving();
+                });
+            });
+        } else {
+          resolving();
+        }
+      });
+  });
+}
