@@ -2,9 +2,27 @@ var express = require('express');
 var app = express();
 var mongodb = require('mongodb');
 var uri = 'mongodb://'+process.env.USER+':'+process.env.PASS+'@'+process.env.HOST+':'+process.env.PORT+'/'+process.env.DB;
-mongodb.MongoClient.connect(uri, function(err, db) {
-if(err) throw err;
-}
+var seedData = [
+  {
+    decade: '1970s',
+    artist: 'Debby Boone',
+    song: 'You Light Up My Life',
+    weeksAtOne: 10
+  },
+  {
+    decade: '1980s',
+    artist: 'Olivia Newton-John',
+    song: 'Physical',
+    weeksAtOne: 10
+  },
+  {
+    decade: '1990s',
+    artist: 'Mariah Carey',
+    song: 'One Sweet Day',
+    weeksAtOne: 16
+  }
+];
+
 app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
 
@@ -21,6 +39,26 @@ var spotifyApi = new SpotifyWebApi({
 app.use(express.static('public'));
 
 app.get("/", function(request, response) {
+  mongodb.MongoClient.connect(uri, function(err, db) {
+	  if (err) throw err;
+	  var songs = db.collection('songstellation');
+	  songs.insert(seedData, function(err, result) {
+	  	if (err) throw err;
+  		songs.update({
+  				song: 'One Sweet Day'
+  			}, {
+  				$set: {
+  					artist: 'Mariah Carey ft. Boyz II Men'
+  				}
+  			},
+  			function(err, result) {
+  				if (err) throw err;
+  			});
+  	});
+  	db.close(function(err) {
+  		if (err) throw err;
+  	});
+  });
 	response.sendFile(__dirname + '/views/index.html');
 });
 
