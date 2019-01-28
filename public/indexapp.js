@@ -56,7 +56,7 @@ particlesJS('bg-layer-0',
       "move": {
         "enable": true,
         "speed": 0.3,
-        "direction": "none",
+        "direction": "bottom",
         "random": false,
         "straight": false,
         "out_mode": "out",
