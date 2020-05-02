@@ -41,7 +41,7 @@ app.get("/callback", function(request, response) {
 				spotifyApi.setAccessToken(data.body['access_token']);
 				spotifyApi.setRefreshToken(data.body['refresh_token']);
 				spotifyApi.getMyTopTracks({
-						time_range: "long_term",
+						time_range: "short_term",
 						limit: 10,
 						offset: 0
 					})
