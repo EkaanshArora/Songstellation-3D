@@ -61,10 +61,10 @@ const awaitFunc = async () => {
   // Materials
 
   const material = new THREE.PointsMaterial(
-    { size: 0.004, color: 0xffffff }
+    { size: 0.008, color: 0xffffff }
   )
   const materialBright = new THREE.PointsMaterial(
-    { size: 0.010, color: 0xffffff }
+    { size: 0.012, color: 0xffffff }
   )
   const songMat = new THREE.MeshStandardMaterial(
     { color: 0x000000, emissive: 0xffffff, emissiveIntensity: 1 }
@@ -91,7 +91,7 @@ const awaitFunc = async () => {
   for (let i = 0; i < songCount; i++) {
     let geo = new THREE.SphereGeometry(0.025, 32, 16)
     let textg = new TextGeometry(tracks[i], {
-      size: 0.04,
+      size: 0.06,
       height: 0.001,
       font: (font as Font),
       curveSegments: 4,
@@ -173,8 +173,7 @@ const awaitFunc = async () => {
    * Renderer
    */
   const renderer = new THREE.WebGLRenderer({
-    canvas: (canvas as HTMLCanvasElement),
-    antialias: true,
+    canvas: (canvas as HTMLCanvasElement)
   })
   renderer.toneMapping = THREE.ReinhardToneMapping;
   renderer.setSize(sizes.width, sizes.height)

@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "dev": "nodemon server.js",
     "three": "cd threejs && npm run build && xcopy .\\dist ..\\public\\ && cd .. && move .\\public\\index.html .\\views\\callback.html"
   },
   "dependencies": {
@@ -19,5 +20,9 @@
     "spotify",
     "express",
     "constellation"
-  ]
+  ],
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "nodemon": "^2.0.16"
+  }
 }
