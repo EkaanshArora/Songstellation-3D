@@ -1,10 +1,11 @@
 // import './style.css'
 import SpotifyWebApi from 'spotify-web-api-node';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import * as THREE from 'three'
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
+import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 import { Font, FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { BufferGeometry, Vector3 } from 'three';
@@ -161,14 +162,14 @@ const awaitFunc = async () => {
   }
 
   // Base camera
-  const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 0.1, 1000)
+  const camera = new THREE.PerspectiveCamera(62, sizes.width / sizes.height, 0.1, 1000)
   camera.position.z = 4.5
   scene.add(camera)
 
   // Controls
   const controls = new OrbitControls(camera, (canvas as HTMLCanvasElement))
   controls.enableDamping = true
-
+  controls.maxDistance = 7
   /**
    * Renderer
    */
@@ -191,9 +192,18 @@ const awaitFunc = async () => {
   bloomPass.strength = params.bloomStrength;
   bloomPass.radius = params.bloomRadius;
 
+  const filmPass = new FilmPass(
+    0.25,   // noise intensity
+    0.33,  // scanline intensity
+    500,    // scanline count
+    0,  // grayscale
+  );
+  filmPass.renderToScreen = true;
+
   let composer = new EffectComposer(renderer);
   composer.addPass(renderScene);
   composer.addPass(bloomPass);
+  composer.addPass(filmPass);
 
   window.addEventListener('resize', () => {
     console.log('!resize')
@@ -217,8 +227,8 @@ const awaitFunc = async () => {
     color.setHSL(hue, 1, 0.8)
     songMat.emissive = color
     renderer.render(scene, camera)
-    camera.setRotationFromEuler(new THREE.Euler(camera.rotation.x, camera.rotation.y, camera.rotation.z + 0.00005))
-    camera.position.set(camera.position.x,camera.position.y,camera.position.z - 0.0002)
+    // camera.setRotationFromEuler(new THREE.Euler(camera.rotation.x, camera.rotation.y, camera.rotation.z + 0.00005))
+    // camera.position.set(camera.position.x,camera.position.y,camera.position.z - 0.0002)
     composer.render();
     window.requestAnimationFrame(tick)
   }
