@@ -4,15 +4,13 @@
   "description": "Make a constellation out of your Spotify top ten tracks.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "cd threejs && npm run build && xcopy .\\dist ..\\public\\ && cd .. && move .\\public\\index.html .\\views\\callback.html"
   },
   "dependencies": {
     "express": "^4.16.4",
     "hbs": "^4.0.1",
     "spotify-web-api-node": "^4.0.0"
-  },
-  "engines": {
-    "node": "8.x"
   },
   "license": "MIT",
   "keywords": [
