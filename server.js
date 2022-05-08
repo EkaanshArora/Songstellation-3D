@@ -40,7 +40,10 @@ app.get("/callback", async function (request, response) {
 		response.redirect('/');
 	} else {
 		// var dataToSendObj;
-		let data = await spotifyApi.authorizationCodeGrant(authorizationCode)
+		let data = await spotifyApi.authorizationCodeGrant(authorizationCode).catch(e => {
+			console.log(e, request.body)
+			response.sendStatus(500)
+		})
 		// spotifyApi.setAccessToken(data.body['access_token']);
 		// spotifyApi.setRefreshToken(data.body['refresh_token']);
 		response.render(__dirname + '/views/callback.html', { access: data.body['access_token'], refresh: data.body['refresh_token'] });
