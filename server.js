@@ -1,5 +1,3 @@
-//https://accounts.spotify.com/en/login?continue=https%3A%2F%2Faccounts.spotify.com%2Fauthorize%3Fscope%3Duser-top-read%26response_type%3Dcode%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A9000%252Fcallback%26client_id%3D3e7fa2f4882e4d29818d4a0c6d5aff40
-
 var express = require('express');
 var dotenv = require('dotenv')
 dotenv.config({})
@@ -39,14 +37,12 @@ app.get("/callback", async function (request, response) {
 	if (!authorizationCode) {
 		response.redirect('/');
 	} else {
-		// var dataToSendObj;
-		let data = await spotifyApi.authorizationCodeGrant(authorizationCode).catch(e => {
-			console.log(e, request.body)
-			response.sendStatus(500)
+		spotifyApi.authorizationCodeGrant(authorizationCode).then(data => {
+			response.render(__dirname + '/views/callback.html', { access: data.body['access_token'], refresh: data.body['refresh_token'] });
+		}).catch(e => {
+			console.log(e)
+			response.redirect('/authorize');
 		})
-		// spotifyApi.setAccessToken(data.body['access_token']);
-		// spotifyApi.setRefreshToken(data.body['refresh_token']);
-		response.render(__dirname + '/views/callback.html', { access: data.body['access_token'], refresh: data.body['refresh_token'] });
 	}
 });
 
